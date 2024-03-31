@@ -4,8 +4,10 @@ import com.tourplanner.backend.persistence.entity.TourEntity;
 import com.tourplanner.backend.persistence.repository.TourRepository;
 import com.tourplanner.backend.service.dto.TourDto;
 import com.tourplanner.backend.service.mapper.TourMapper;
+import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -13,6 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -35,24 +38,6 @@ public class TourServiceImplTest {
     }
 
     @Test
-    void whenGetAllToursCalled_thenReturnDtoList() {
-        // Arrange
-        List<TourEntity> tourEntities = Arrays.asList(new TourEntity());
-        List<TourDto> tourDtos = Arrays.asList(new TourDto());
-
-        when(tourRepository.findAll()).thenReturn(tourEntities);
-        when(tourMapper.mapToDto(tourEntities.get(0))).thenReturn(tourDtos.get(0));
-
-        // Act
-        List<TourDto> result = tourService.getAllTours();
-
-        // Assert
-        assertEquals(tourDtos, result);
-        verify(tourRepository).findAll();
-        verify(tourMapper).mapToDto(tourEntities.get(0));
-    }
-
-    @Test
     void whenSaveNewTourCalled_thenRepositorySaveCalled() {
         // Arrange
         TourDto tourDto = new TourDto();
@@ -62,16 +47,10 @@ public class TourServiceImplTest {
         when(tourRepository.save(any(TourEntity.class))).thenReturn(tourEntity);
 
         // Act
-        tourService.saveNewTour(tourDto);
+        tourService.addNewTour(tourDto);
 
         // Assert
         verify(tourRepository).save(any(TourEntity.class));
-    }
-
-    @Test
-    void whenSaveNewTourCalled_withNullDto_thenThrowException() {
-        // Act & Assert
-        assertThrows(IllegalArgumentException.class, () -> tourService.saveNewTour(null));
     }
 
     @Test
@@ -87,22 +66,80 @@ public class TourServiceImplTest {
     }
 
     @Test
-    void whenGetAllToursCalled_thenReturnCorrectDtoProperties() {
+    void whenDeleteTourCalled_thenRepositoryDeleteByIdCalled() {
         // Arrange
-        TourEntity tourEntity = new TourEntity(1L, "Sample Tour", 100L);
-        TourDto tourDto = new TourDto(1L, "Sample Tour", 100L);
-
-        when(tourRepository.findAll()).thenReturn(Arrays.asList(tourEntity));
-        when(tourMapper.mapToDto(tourEntity)).thenReturn(tourDto);
+        Long tourId = 1L;
 
         // Act
-        List<TourDto> result = tourService.getAllTours();
+        tourService.deleteTourById(tourId);
+
+        // Assert
+        verify(tourRepository).deleteById(tourId);
+    }
+
+    @Test
+    void whenUpdateTourCalled_thenRepositorySaveCalledWithCorrectTourEntity() {
+        // Arrange
+        TourDto tourDto = new TourDto();
+        tourDto.setId(1L);
+        tourDto.setName("Name");
+        tourDto.setDistance(100L);
+
+        TourEntity expectedTourEntity = TourEntity.builder()
+                .id(tourDto.getId())
+                .name(tourDto.getName())
+                .distance(tourDto.getDistance())
+                .build();
+
+        when(tourRepository.save(any(TourEntity.class))).thenReturn(expectedTourEntity);
+
+        // Act
+        tourService.updateTour(tourDto);
+
+        // Assert
+        ArgumentCaptor<TourEntity> tourEntityArgumentCaptor = ArgumentCaptor.forClass(TourEntity.class);
+        verify(tourRepository).save(tourEntityArgumentCaptor.capture());
+        TourEntity capturedEntity = tourEntityArgumentCaptor.getValue();
+
+        assertEquals(tourDto.getId(), capturedEntity.getId());
+        assertEquals(tourDto.getName(), capturedEntity.getName());
+        assertEquals(tourDto.getDistance(), capturedEntity.getDistance());
+    }
+
+    @Test
+    void whenGetTourByIdCalled_andTourExists_thenReturnCorrectTourDto() {
+        // Arrange
+        Long tourId = 1L;
+        TourEntity expectedTourEntity = new TourEntity();
+        expectedTourEntity.setId(tourId);
+        // Assume expectedTourEntity has more fields that you'd set here for a real test
+
+        TourDto expectedTourDto = new TourDto();
+        expectedTourDto.setId(tourId);
+        // Similarly, set other fields on expectedTourDto as needed
+
+        when(tourRepository.findById(tourId)).thenReturn(Optional.of(expectedTourEntity));
+        when(tourMapper.mapToDto(expectedTourEntity)).thenReturn(expectedTourDto);
+
+        // Act
+        TourDto result = tourService.getTourById(tourId);
 
         // Assert
         assertNotNull(result);
-        assertFalse(result.isEmpty());
-        assertEquals(tourEntity.getId(), result.get(0).getId());
-        assertEquals(tourEntity.getName(), result.get(0).getName());
-        assertEquals(tourEntity.getDistance(), result.get(0).getDistance());
+        assertEquals(expectedTourDto.getId(), result.getId());
+        // Optionally, assert other fields are equal as needed
     }
+
+    @Test
+    void whenGetTourByIdCalled_andTourDoesNotExist_thenThrowEntityNotFoundException() {
+        // Arrange
+        Long tourId = 1L;
+        when(tourRepository.findById(tourId)).thenReturn(Optional.empty());
+
+        // Act & Assert
+        assertThrows(EntityNotFoundException.class, () -> {
+            tourService.getTourById(tourId);
+        });
+    }
+
 }

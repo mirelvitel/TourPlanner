@@ -11,11 +11,6 @@ import java.util.List;
 @RequestMapping(path = "tour")
 public class TourApi {
 
-    @GetMapping("/hello")
-    public String sayHello() {
-        return "Hello, World!";
-    }
-
     @Autowired
     private TourService tourService;
 
@@ -23,10 +18,25 @@ public class TourApi {
     public List<TourDto> getAllTours() {
         return tourService.getAllTours();
     }
-    @PostMapping
-    public void insertNewTour(@RequestBody TourDto tour) {
-        tourService.saveNewTour(tour);
+
+    @GetMapping(params = "id")
+    public TourDto getTourById(@RequestParam Long id) {
+        return tourService.getTourById(id);
     }
 
+    @DeleteMapping(params = "id")
+    public void deleteTourById(@RequestParam Long id) {
+        tourService.deleteTourById(id);
+    }
+
+    @PutMapping
+    public void updateTour(@RequestBody TourDto tour) {
+        tourService.updateTour(tour);
+    }
+
+    @PostMapping
+    public void addNewTour(@RequestBody TourDto tour) {
+        tourService.addNewTour(tour);
+    }
 }
 
