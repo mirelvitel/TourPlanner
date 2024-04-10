@@ -23,63 +23,70 @@ import static org.mockito.Mockito.*;
 @SpringBootTest
 public class TourServiceImplTest {
 
+    // Mocking dependencies
     @Mock
     private TourRepository tourRepository;
-
     @Mock
     private TourMapper tourMapper;
 
+    // Inject mocks into the tested service implementation
     @InjectMocks
     private TourServiceImpl tourService;
 
+    // Initializes mocks before each test case
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
     }
 
+    // Tests that the repository's save method is called when a new tour is added
     @Test
     void whenSaveNewTourCalled_thenRepositorySaveCalled() {
-        // Arrange
+        // Arrange: Setting up DTO and entity, and mocking behavior
         TourDto tourDto = new TourDto();
         TourEntity tourEntity = new TourEntity();
 
+        // Mock mapper and repository behavior
         when(tourMapper.mapToDto(tourEntity)).thenReturn(tourDto);
         when(tourRepository.save(any(TourEntity.class))).thenReturn(tourEntity);
 
-        // Act
+        // Act: Attempt to add a new tour
         tourService.addNewTour(tourDto);
 
-        // Assert
+        // Assert: Verify that save was indeed called on the repository
         verify(tourRepository).save(any(TourEntity.class));
     }
 
+    // Tests that an empty list is returned when there are no tours to retrieve
     @Test
     void whenGetAllToursCalled_andNoToursExist_thenReturnEmptyList() {
-        // Arrange
+        // Arrange: Mock repository to return an empty list
         when(tourRepository.findAll()).thenReturn(Arrays.asList());
 
-        // Act
+        // Act: Retrieve all tours
         List<TourDto> result = tourService.getAllTours();
 
-        // Assert
+        // Assert: Verify the result is an empty list
         assertTrue(result.isEmpty());
     }
 
+    // Tests that the repository's deleteById method is called with the correct ID
     @Test
     void whenDeleteTourCalled_thenRepositoryDeleteByIdCalled() {
-        // Arrange
+        // Arrange: Provide a sample tour ID
         Long tourId = 1L;
 
-        // Act
+        // Act: Attempt to delete a tour by ID
         tourService.deleteTourById(tourId);
 
-        // Assert
+        // Assert: Verify that deleteById was called on the repository with the correct ID
         verify(tourRepository).deleteById(tourId);
     }
 
+    // Tests that updating a tour results in the correct entity being saved
     @Test
     void whenUpdateTourCalled_thenRepositorySaveCalledWithCorrectTourEntity() {
-        // Arrange
+        // Arrange: Setup DTO and expected entity
         TourDto tourDto = new TourDto();
         tourDto.setId(1L);
         tourDto.setName("Name");
@@ -91,55 +98,55 @@ public class TourServiceImplTest {
                 .distance(tourDto.getDistance())
                 .build();
 
+        // Mock repository to return the expected entity
         when(tourRepository.save(any(TourEntity.class))).thenReturn(expectedTourEntity);
 
-        // Act
+        // Act: Attempt to update a tour
         tourService.updateTour(tourDto);
 
-        // Assert
+        // Assert: Capture and verify the entity passed to save
         ArgumentCaptor<TourEntity> tourEntityArgumentCaptor = ArgumentCaptor.forClass(TourEntity.class);
         verify(tourRepository).save(tourEntityArgumentCaptor.capture());
         TourEntity capturedEntity = tourEntityArgumentCaptor.getValue();
 
+        // Assert fields are correctly set
         assertEquals(tourDto.getId(), capturedEntity.getId());
         assertEquals(tourDto.getName(), capturedEntity.getName());
         assertEquals(tourDto.getDistance(), capturedEntity.getDistance());
     }
 
+    // Tests that a correct TourDto is returned for an existing tour ID
     @Test
     void whenGetTourByIdCalled_andTourExists_thenReturnCorrectTourDto() {
-        // Arrange
+        // Arrange: Setup entity, DTO, and mock repository and mapper behavior
         Long tourId = 1L;
         TourEntity expectedTourEntity = new TourEntity();
         expectedTourEntity.setId(tourId);
-        // Assume expectedTourEntity has more fields that you'd set here for a real test
 
         TourDto expectedTourDto = new TourDto();
         expectedTourDto.setId(tourId);
-        // Similarly, set other fields on expectedTourDto as needed
 
         when(tourRepository.findById(tourId)).thenReturn(Optional.of(expectedTourEntity));
         when(tourMapper.mapToDto(expectedTourEntity)).thenReturn(expectedTourDto);
 
-        // Act
+        // Act: Retrieve tour by ID
         TourDto result = tourService.getTourById(tourId);
 
-        // Assert
+        // Assert: Verify the result matches the expected DTO
         assertNotNull(result);
         assertEquals(expectedTourDto.getId(), result.getId());
-        // Optionally, assert other fields are equal as needed
     }
 
+    // Tests that an EntityNotFoundException is thrown when a non-existent tour ID is queried
     @Test
     void whenGetTourByIdCalled_andTourDoesNotExist_thenThrowEntityNotFoundException() {
-        // Arrange
+        // Arrange: Mock repository to return empty optional
         Long tourId = 1L;
         when(tourRepository.findById(tourId)).thenReturn(Optional.empty());
 
-        // Act & Assert
+        // Act & Assert: Verify that querying a non-existent ID throws the exception
         assertThrows(EntityNotFoundException.class, () -> {
             tourService.getTourById(tourId);
         });
     }
-
 }
