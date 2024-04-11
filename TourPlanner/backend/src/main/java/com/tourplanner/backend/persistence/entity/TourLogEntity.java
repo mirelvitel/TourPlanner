@@ -18,8 +18,9 @@ public class TourLogEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "tour_id")
-    private Long tourId;
+    @ManyToOne
+    @JoinColumn(name = "tour_id", nullable = false)
+    private TourEntity tour;
 
     @Column(name = "date_time")
     private LocalDateTime dateTime;
@@ -40,6 +41,7 @@ public class TourLogEntity {
     private int rating;
 
 }
+
 
 //This file defines the `TourLogEntity` class,
 // which is a JPA entity representing the tour log data in the database.

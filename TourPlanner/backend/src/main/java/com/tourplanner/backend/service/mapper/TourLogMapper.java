@@ -20,7 +20,7 @@ public class TourLogMapper {
 
         TourLogEntity entity = new TourLogEntity();
         entity.setId(dto.getId());
-        entity.setTourId(dto.getTourId());
+      //  entity.setTourId(dto.getTourId());
         entity.setDateTime(LocalDateTime.parse(dto.getDateTime(), formatter));
         entity.setComment(dto.getComment());
         entity.setDifficulty(dto.getDifficulty());
@@ -39,7 +39,7 @@ public class TourLogMapper {
 
         return TourLogDto.builder()
                 .id(entity.getId())
-                .tourId(entity.getTourId())
+          //      .tourId(entity.getTourId())
                 .dateTime(entity.getDateTime().format(formatter))
                 .comment(entity.getComment())
                 .difficulty(entity.getDifficulty())

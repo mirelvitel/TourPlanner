@@ -33,10 +33,11 @@ public class TourLogServiceImpl implements TourLogService {
     @Override
     public List<TourLogDto> getTourLogsByTourId(Long tourId) {
         List<TourLogEntity> tourLogEntities = tourLogRepository.findAll().stream()
-                .filter(tourLog -> tourLog.getTourId().equals(tourId))
+                .filter(tourLog -> tourLog.getTour().getId().equals(tourId))
                 .collect(Collectors.toList());
         return tourLogEntities.stream().map(tourLogMapper::toDto).collect(Collectors.toList());
     }
+
 
     @Override
     public void updateTourLog(TourLogDto tourLogDto) {
