@@ -43,8 +43,10 @@ public class TourApi {
     // Endpoint to update a tour
     @PutMapping("/{id}")
     public void updateTour(@PathVariable Long id, @RequestBody TourDto tourDto) {
-        tourDto.setId(id); // Ensure the DTO has the correct ID for the update operation
+        tourDto.setId(id);
+        System.out.println("1");
         tourService.updateTour(tourDto);
+        System.out.println("2");
     }
 
     // Endpoint to add a new tour

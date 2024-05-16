@@ -5,13 +5,17 @@ import com.tourplanner.backend.service.dto.TourDto;
 import org.springframework.stereotype.Component;
 
 @Component
-public class TourMapper extends AbstractMapper<TourEntity, TourDto>{
+public class TourMapper extends AbstractMapper<TourEntity, TourDto> {
     @Override
     public TourDto mapToDto(TourEntity source) {
         return TourDto.builder()
                 .id(source.getId())
                 .name(source.getName())
-                .distance(source.getDistance())
+                .tourDistance(source.getTourDistance())
+                .tourDescription(source.getTourDescription())
+                .transportType(source.getTransportType())
+                .endLocation(source.getEndLocation())
+                .startLocation(source.getStartLocation())
                 .build();
     }
 }

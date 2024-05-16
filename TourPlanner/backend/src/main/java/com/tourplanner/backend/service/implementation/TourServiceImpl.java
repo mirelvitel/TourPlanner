@@ -10,22 +10,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class TourServiceImpl implements TourService {
 
     @Autowired
     private TourRepository tourRepository;
+
     @Autowired
     private TourMapper tourMapper;
 
     @Override
     public void addNewTour(TourDto tourDto) {
-        TourEntity entity = TourEntity.builder()
-                .id(tourDto.getId())
-                .name(tourDto.getName())
-                .distance(tourDto.getDistance())
-                .build();
+        TourEntity entity = mapToEntity(tourDto);
         tourRepository.save(entity);
     }
 
@@ -36,26 +34,36 @@ public class TourServiceImpl implements TourService {
 
     @Override
     public void updateTour(TourDto tourDto) {
-        TourEntity entity = TourEntity.builder()
-                .id(tourDto.getId())
-                .name(tourDto.getName())
-                .distance(tourDto.getDistance())
-                .build();
+        System.out.println("3");
+        TourEntity entity = mapToEntity(tourDto);
+        System.out.println("4");
         tourRepository.save(entity);
+        System.out.println("5");
     }
 
     @Override
     public TourDto getTourById(Long id) {
         return tourMapper.mapToDto(
-                tourRepository.findById(id).orElseThrow(()
-                        -> new EntityNotFoundException("Tour not found with id " + id))
+                tourRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Tour not found with id " + id))
         );
     }
 
     @Override
     public List<TourDto> getAllTours() {
-        return tourMapper.mapToDto(tourRepository.findAll());
+        return tourRepository.findAll().stream()
+                .map(tourMapper::mapToDto)
+                .collect(Collectors.toList());
     }
 
-
+    private TourEntity mapToEntity(TourDto tourDto) {
+        return TourEntity.builder()
+                .id(tourDto.getId())
+                .name(tourDto.getName())
+                .tourDistance(tourDto.getTourDistance())
+                .tourDescription(tourDto.getTourDescription())
+                .transportType(tourDto.getTransportType())
+                .endLocation(tourDto.getEndLocation())
+                .startLocation(tourDto.getStartLocation())
+                .build();
+    }
 }

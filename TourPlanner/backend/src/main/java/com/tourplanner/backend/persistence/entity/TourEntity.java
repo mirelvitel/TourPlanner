@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-
 @Entity
 @Table(name = "tour")
 @Data
@@ -23,8 +22,20 @@ public class TourEntity {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "distance")
-    private Long distance;
+    @Column(name = "tour_distance")
+    private Long tourDistance;
+
+    @Column(name = "tour_description")
+    private String tourDescription;
+
+    @Column(name = "transport_type")
+    private String transportType;
+
+    @Column(name = "end_location")
+    private String endLocation;
+
+    @Column(name = "start_location")
+    private String startLocation;
 
     @OneToMany(mappedBy = "tour", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TourLogEntity> tourLogs;

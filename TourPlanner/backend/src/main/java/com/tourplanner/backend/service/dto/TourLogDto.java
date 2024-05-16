@@ -19,9 +19,3 @@ public class TourLogDto {
     private double totalTime;
     private int rating;
 }
-
-
-//The `TourLogDto` class serves as a Data Transfer Object (DTO) for tour log information in the Tour Planner application.
-// It encapsulates the data required to create, update, and display logs of tours, including details such as the date and time of the log,
-// comments, difficulty level, total distance, total time spent, and the user's rating of the tour.
-// Utilizing Lombok annotations, this class simplifies the creation of boilerplate code for getters, setters, constructors, and the builder pattern.

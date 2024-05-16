@@ -41,11 +41,3 @@ public class TourLogEntity {
     private int rating;
 
 }
-
-
-//This file defines the `TourLogEntity` class,
-// which is a JPA entity representing the tour log data in the database.
-// It includes annotations to map each field to a corresponding column in the `tour_log` table,
-// with fields for storing a tour's ID, the date and time of the log, comments, difficulty, total distance, total time, and a rating.
-// The class uses Lombok annotations for boilerplate code like getters, setters, constructors, and a builder pattern for easier instantiation.
-// This entity is central to persisting and accessing tour log information within the application, enabling CRUD operations on tour logs.
