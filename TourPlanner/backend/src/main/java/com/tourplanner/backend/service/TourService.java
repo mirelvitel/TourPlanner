@@ -2,6 +2,7 @@ package com.tourplanner.backend.service;
 
 import com.tourplanner.backend.persistence.entity.TourEntity;
 import com.tourplanner.backend.service.dto.TourDto;
+import com.tourplanner.backend.service.dto.TourLogDto;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,3 +19,4 @@ public interface TourService {
 
     List<TourDto> getAllTours();
 }
+
