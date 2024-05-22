@@ -90,12 +90,12 @@ public class TourServiceImplTest {
         TourDto tourDto = new TourDto();
         tourDto.setId(1L);
         tourDto.setName("Name");
-        tourDto.setDistance(100L);
+        tourDto.setTourDistance(100L);
 
         TourEntity expectedTourEntity = TourEntity.builder()
                 .id(tourDto.getId())
                 .name(tourDto.getName())
-                .distance(tourDto.getDistance())
+                .tourDistance(tourDto.getTourDistance())
                 .build();
 
         // Mock repository to return the expected entity
@@ -112,7 +112,7 @@ public class TourServiceImplTest {
         // Assert fields are correctly set
         assertEquals(tourDto.getId(), capturedEntity.getId());
         assertEquals(tourDto.getName(), capturedEntity.getName());
-        assertEquals(tourDto.getDistance(), capturedEntity.getDistance());
+        assertEquals(tourDto.getTourDistance(), capturedEntity.getTourDistance());
     }
 
     // Tests that a correct TourDto is returned for an existing tour ID

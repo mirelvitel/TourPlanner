@@ -40,6 +40,7 @@ public class TourServiceImpl implements TourService {
 
     @Override
     public TourDto getTourById(Long id) {
+        System.out.println("ServiceImpl");
         return tourMapper.mapToDto(
                 tourRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Tour not found with id " + id))
         );

@@ -30,19 +30,19 @@ public class TourApi {
 
     // Endpoint to retrieve a single tour by ID
     @GetMapping("/{id}")
-    public TourDto getTourById(@PathVariable Long id) {
+    public TourDto getTourById(@PathVariable("id") Long id) {
         return tourService.getTourById(id);
     }
 
     // Endpoint to delete a tour by ID
     @DeleteMapping("/{id}")
-    public void deleteTourById(@PathVariable Long id) {
+    public void deleteTourById(@PathVariable("id") Long id) {
         tourService.deleteTourById(id);
     }
 
     // Endpoint to update a tour
     @PutMapping("/{id}")
-    public void updateTour(@PathVariable Long id, @RequestBody TourDto tourDto) {
+    public void updateTour(@PathVariable("id") Long id, @RequestBody TourDto tourDto) {
         tourDto.setId(id);
         tourService.updateTour(tourDto);
     }
@@ -57,20 +57,20 @@ public class TourApi {
 
     // Endpoint to add a new tour log
     @PostMapping("/{tourId}/log")
-    public void addTourLog(@PathVariable Long tourId, @RequestBody TourLogDto tourLogDto) {
+    public void addTourLog(@PathVariable("tourId") Long tourId, @RequestBody TourLogDto tourLogDto) {
         tourLogDto.setTourId(tourId);
         tourLogService.addTourLog(tourLogDto);
     }
 
     // Endpoint to retrieve all logs for a specific tour
     @GetMapping("/{tourId}/log")
-    public List<TourLogDto> getTourLogsByTourId(@PathVariable Long tourId) {
+    public List<TourLogDto> getTourLogsByTourId(@PathVariable("tourId") Long tourId) {
         return tourLogService.getTourLogsByTourId(tourId);
     }
 
     // Endpoint to update a specific tour log
     @PutMapping("/{tourId}/log/{logId}")
-    public void updateTourLog(@PathVariable Long tourId, @PathVariable Long logId, @RequestBody TourLogDto tourLogDto) {
+    public void updateTourLog(@PathVariable("tourId") Long tourId, @PathVariable("logId") Long logId, @RequestBody TourLogDto tourLogDto) {
         tourLogDto.setId(logId); // Ensure the DTO has the correct logId
         tourLogDto.setTourId(tourId); // Ensure the DTO has the correct tourId
         tourLogService.updateTourLog(tourLogDto);
@@ -78,7 +78,7 @@ public class TourApi {
 
     // Endpoint to delete a specific tour log
     @DeleteMapping("/{tourId}/log/{logId}")
-    public void deleteTourLog(@PathVariable Long logId) {
+    public void deleteTourLog(@PathVariable("logId") Long logId) {
         tourLogService.deleteTourLog(logId);
     }
 }

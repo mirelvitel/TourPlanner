@@ -1,0 +1,323 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;800&display=swap');
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    width: 90%;
+    height: 90%;
+    background: #FFFFFF;
+    max-width: 760px;
+    max-height: 90vh;
+    overflow: hidden;
+}
+
+.heading {
+    font-family: 'Inter', sans-serif;
+    font-style: italic;
+    font-weight: 800;
+    font-size: 20px;
+    line-height: 24px;
+    color: #00689E;
+    text-align: center;
+    margin: 10px 0;
+}
+
+.content-container {
+    display: flex;
+    gap: 11px;
+    flex: 1;
+    overflow: hidden;
+}
+
+.left-container {
+    padding: 10px;
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: #FFFFFF;
+    border: 1px solid #8CB323;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    position: relative;
+    overflow-y: auto; /* Add this line to make it scrollable */
+    max-height: calc(100vh - 20px); /* Adjust the height to fit within the viewport */
+}
+
+.left-container h2 {
+    position: absolute;
+    width: 100%;
+    height: 32px;
+    left: 0px;
+    top: 0px;
+    background: #EFEFEF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0px;
+}
+
+.left-container h2::before {
+    content: "Tours";
+    position: absolute;
+    width: 52px;
+    height: 24px;
+    top: 4px;
+    font-family: 'Inter', sans-serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 24px;
+    color: #00689E;
+}
+
+
+.tour-list {
+    list-style: none;
+    padding: 50px 0 0; /* Adjust padding to make room for the absolutely positioned h2 */
+    margin: 0;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.tour-list li {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    color: #868686;
+    cursor: pointer;
+    padding: 5px 0;
+}
+
+.tour-list li.active {
+    color: #99cc00;
+}
+
+.tour-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 40px 10px 10px; /* Adjust padding to make room for the header */
+}
+
+.tour-form label {
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    color: #333;
+}
+
+.tour-form input, .tour-form textarea {
+    padding: 5px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    width: calc(100% - 12px); /* Adjust for padding */
+}
+
+.tour-form textarea {
+    resize: vertical;
+}
+
+.form-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.tour-form button {
+    padding: 5px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    flex: 1;
+    margin-right: 5px;
+}
+
+.tour-form button[type="submit"] {
+    background-color: #8CB323;
+    color: #fff;
+}
+
+.tour-form button[type="button"] {
+    background-color: #9E0000;
+    color: #fff;
+    margin-right: 0; /* Remove right margin from the last button */
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+}
+
+button {
+    padding: 0.5em;
+    cursor: pointer;
+}
+
+.add, .delete {
+    border: none;
+    border-radius: 5px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    color: #FFFFFF;
+    padding: 5px 10px;
+}
+
+.add {
+    background: #8CB323;
+}
+
+.delete {
+    background: #9E0000;
+}
+
+.right-container {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 11px;
+    width: calc(100% - 250px); /* Adjust width to always fit the remaining space */
+}
+
+.top-container {
+    flex: 1;
+    overflow: hidden;
+    box-sizing: border-box;
+    border: 1px solid #8CB323;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.top-container img {
+    width: 100%;
+    height: auto;
+}
+
+.bottom-container {
+    box-sizing: border-box;
+    background: #FFFFFF;
+    border: 1px solid #8CB323;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    padding: 20px;
+    overflow-y: auto;
+    position: relative; /* Add this line */
+}
+
+
+.bottom-container p {
+    font-family: 'Inter', sans-serif;
+    font-style: italic;
+    font-weight: 900;
+    font-size: 32px;
+    line-height: 39px;
+    color: #E7E7E7;
+}
+
+.tour-details {
+    text-align: left;
+}
+
+.tour-details h3 {
+    margin-top: 0;
+    color: #00689E;
+}
+
+.tour-details p {
+    margin: 5px 0;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    color: #333; /* Use black color for the main text */
+}
+
+.tour-details p strong {
+    color: #8CB323; /* Use the specified green color for the strong text */
+}
+
+.edit {
+    background-color: #00689E;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    position: absolute; /* Use absolute positioning */
+    bottom: 10px; /* Position 10px from the bottom */
+    right: 10px; /* Position 10px from the right */
+}
+
+
+.edit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+}
+
+.edit-form label {
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    color: #333;
+}
+
+.edit-form input, .edit-form textarea {
+    padding: 5px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.edit-form textarea {
+    resize: vertical;
+}
+
+.form-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.edit-form button[type="submit"] {
+    background-color: #8CB323;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.edit-form button[type="button"] {
+    background-color: #9E0000;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#map {
+    min-height: 300px; /* Adjust as needed */
+    max-width: 300px;
+}
