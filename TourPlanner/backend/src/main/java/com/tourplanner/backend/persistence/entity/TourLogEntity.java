@@ -23,7 +23,7 @@ public class TourLogEntity {
     private TourEntity tour;
 
     @Column(name = "date_time")
-    private LocalDateTime dateTime;
+    private String dateTime;
 
     @Column(name = "comment")
     private String comment;
@@ -39,5 +39,4 @@ public class TourLogEntity {
 
     @Column(name = "rating")
     private int rating;
-
 }

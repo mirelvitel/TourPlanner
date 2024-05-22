@@ -37,6 +37,6 @@ public class TourEntity {
     @Column(name = "start_location")
     private String startLocation;
 
-    @OneToMany(mappedBy = "tour", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "tour")
     private List<TourLogEntity> tourLogs;
 }

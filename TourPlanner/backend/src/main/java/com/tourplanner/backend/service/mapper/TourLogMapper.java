@@ -1,7 +1,10 @@
 package com.tourplanner.backend.service.mapper;
 
+import com.tourplanner.backend.persistence.entity.TourEntity;
 import com.tourplanner.backend.persistence.entity.TourLogEntity;
+import com.tourplanner.backend.persistence.repository.TourRepository;
 import com.tourplanner.backend.service.dto.TourLogDto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
@@ -10,9 +13,8 @@ import java.time.format.DateTimeFormatter;
 @Component
 public class TourLogMapper {
 
-    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-
-    // Convert from TourLogDto to TourLogEntity
+    @Autowired
+    private TourRepository tourRepository;
     public TourLogEntity toEntity(TourLogDto dto) {
         if (dto == null) {
             return null;
@@ -20,8 +22,10 @@ public class TourLogMapper {
 
         TourLogEntity entity = new TourLogEntity();
         entity.setId(dto.getId());
-      //  entity.setTourId(dto.getTourId());
-        entity.setDateTime(LocalDateTime.parse(dto.getDateTime(), formatter));
+        TourEntity tour = tourRepository.findById(dto.getTourId())
+                .orElseThrow(() -> new RuntimeException("Tour not found"));
+        entity.setTour(tour);
+        entity.setDateTime(dto.getDateTime());
         entity.setComment(dto.getComment());
         entity.setDifficulty(dto.getDifficulty());
         entity.setTotalDistance(dto.getTotalDistance());
@@ -31,7 +35,6 @@ public class TourLogMapper {
         return entity;
     }
 
-    // Convert from TourLogEntity to TourLogDto
     public TourLogDto toDto(TourLogEntity entity) {
         if (entity == null) {
             return null;
@@ -39,8 +42,8 @@ public class TourLogMapper {
 
         return TourLogDto.builder()
                 .id(entity.getId())
-          //      .tourId(entity.getTourId())
-                .dateTime(entity.getDateTime().format(formatter))
+                .tourId(entity.getTour().getId())
+                .dateTime(entity.getDateTime())
                 .comment(entity.getComment())
                 .difficulty(entity.getDifficulty())
                 .totalDistance(entity.getTotalDistance())
@@ -49,8 +52,3 @@ public class TourLogMapper {
                 .build();
     }
 }
-
-//The `TourLogMapper` class in the `com.tourplanner.backend.service.mapper` package provides bidirectional mapping between `TourLogEntity` and `TourLogDto`.
-// It facilitates the conversion of data transfer objects (DTOs) to entities for persistence in the database and vice versa,
-// ensuring separation of concerns between the application's persistence model and its representation in the API.
-// This mapper utilizes a `DateTimeFormatter` to handle the conversion of date and time fields between string representation in DTOs and `LocalDateTime` in entities.

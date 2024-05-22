@@ -44,9 +44,7 @@ public class TourApi {
     @PutMapping("/{id}")
     public void updateTour(@PathVariable Long id, @RequestBody TourDto tourDto) {
         tourDto.setId(id);
-        System.out.println("1");
         tourService.updateTour(tourDto);
-        System.out.println("2");
     }
 
     // Endpoint to add a new tour
@@ -60,7 +58,7 @@ public class TourApi {
     // Endpoint to add a new tour log
     @PostMapping("/{tourId}/log")
     public void addTourLog(@PathVariable Long tourId, @RequestBody TourLogDto tourLogDto) {
-        tourLogDto.setTourId(tourId); // Ensure the DTO has the correct tourId
+        tourLogDto.setTourId(tourId);
         tourLogService.addTourLog(tourLogDto);
     }
 

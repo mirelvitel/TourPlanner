@@ -34,11 +34,8 @@ public class TourServiceImpl implements TourService {
 
     @Override
     public void updateTour(TourDto tourDto) {
-        System.out.println("3");
         TourEntity entity = mapToEntity(tourDto);
-        System.out.println("4");
         tourRepository.save(entity);
-        System.out.println("5");
     }
 
     @Override
