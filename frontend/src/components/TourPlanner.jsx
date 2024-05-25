@@ -5,12 +5,15 @@ import './TourPlanner.css';
 
 const TourPlanner = () => {
     const [tours, setTours] = useState([]);
+    const [filteredTours, setFilteredTours] = useState([]);
     const [activeTour, setActiveTour] = useState(null);
     const [showForm, setShowForm] = useState(false);
     const [editMode, setEditMode] = useState(false);
     const [logEditMode, setLogEditMode] = useState(false);
     const [tourLogs, setTourLogs] = useState([]);
+    const [filteredLogs, setFilteredLogs] = useState([]);
     const [showLogForm, setShowLogForm] = useState(false);
+    const [searchQuery, setSearchQuery] = useState('');
     const [newTour, setNewTour] = useState({
         name: '',
         tourDistance: '',
@@ -38,6 +41,7 @@ const TourPlanner = () => {
                 console.log('Fetched tours:', response.data);
                 if (Array.isArray(response.data)) {
                     setTours(response.data);
+                    setFilteredTours(response.data);
                 } else {
                     console.error('Expected an array but received:', typeof response.data);
                 }
@@ -77,6 +81,7 @@ const TourPlanner = () => {
                 .then(response => {
                     console.log('Fetched tour logs:', response.data);
                     setTourLogs(response.data);
+                    setFilteredLogs(response.data);
                 })
                 .catch(error => {
                     console.error('There was an error fetching the tour logs!', error);
@@ -85,6 +90,7 @@ const TourPlanner = () => {
             // If no tour is selected, reset to the world view
             mapInstance.current.setView([0, 0], 2);
             setTourLogs([]);
+            setFilteredLogs([]);
         }
     }, [activeTour, tours]);
 
@@ -226,6 +232,7 @@ const TourPlanner = () => {
                     console.log('Deleted tour response:', response.data); // Debug log
                     const updatedTours = tours.filter((_, index) => index !== activeTour);
                     setTours(updatedTours);
+                    setFilteredTours(updatedTours);
                     setActiveTour(null);
                 })
                 .catch(error => {
@@ -241,6 +248,7 @@ const TourPlanner = () => {
                 .then(response => {
                     const updatedLogs = tourLogs.filter(log => log.id !== logId);
                     setTourLogs(updatedLogs);
+                    setFilteredLogs(updatedLogs);
                     window.location.reload(); // Refresh the page to reflect the updated logs
                 })
                 .catch(error => {
@@ -259,12 +267,46 @@ const TourPlanner = () => {
         setEditLog(log);
     };
 
+    const handleSearchChange = (e) => {
+        const query = e.target.value.toLowerCase();
+        setSearchQuery(query);
+        if (query) {
+            setFilteredTours(tours.filter(tour =>
+                tour.name.toLowerCase().includes(query) ||
+                tour.tourDescription.toLowerCase().includes(query) ||
+                tour.startLocation.toLowerCase().includes(query) ||
+                tour.endLocation.toLowerCase().includes(query) ||
+                tour.transportType.toLowerCase().includes(query) ||
+                tour.popularity.toString().includes(query) ||
+                tour.childFriendliness.toString().includes(query)
+            ));
+            setFilteredLogs(tourLogs.filter(log =>
+                log.comment.toLowerCase().includes(query) ||
+                log.dateTime.toLowerCase().includes(query) ||
+                log.difficulty.toString().includes(query) ||
+                log.rating.toString().includes(query) ||
+                log.totalDistance.toString().includes(query) ||
+                log.totalTime.toString().includes(query)
+            ));
+        } else {
+            setFilteredTours(tours);
+            setFilteredLogs(tourLogs);
+        }
+    };
+
     return (
         <div className="main-container">
             <h1 className="heading">Tour Planner</h1>
             <div className="content-container">
                 <div className="left-container">
                     <h2></h2>
+                    <input
+                        type="text"
+                        className="search-input"
+                        placeholder="Search tours..."
+                        value={searchQuery}
+                        onChange={handleSearchChange}
+                    />
                     {showForm ? (
                         <form className="tour-form" onSubmit={handleFormSubmit}>
                             <label>
@@ -299,8 +341,8 @@ const TourPlanner = () => {
                     ) : (
                         <>
                             <ul className="tour-list">
-                                {Array.isArray(tours) ? (
-                                    tours.map((tour, index) => (
+                                {Array.isArray(filteredTours) ? (
+                                    filteredTours.map((tour, index) => (
                                         <li
                                             key={index}
                                             className={activeTour === index ? 'active' : ''}
@@ -401,7 +443,7 @@ const TourPlanner = () => {
 
                                         <h3>Tour Logs</h3>
                                         <ul className="log-list">
-                                            {tourLogs.map(log => (
+                                            {filteredLogs.map(log => (
                                                 <li key={log.id}>
                                                     <p><strong>Date/Time:</strong> {log.dateTime}</p>
                                                     <p><strong>Comment:</strong> {log.comment}</p>
