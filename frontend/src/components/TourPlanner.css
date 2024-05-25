@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;800&display=swap');
+@import url('https://unpkg.com/leaflet/dist/leaflet.css');
+
 
 body {
     font-family: Arial, sans-serif;
@@ -194,7 +196,6 @@ button {
     flex-direction: column;
     flex: 1;
     gap: 11px;
-    width: calc(100% - 250px); /* Adjust width to always fit the remaining space */
 }
 
 .top-container {
@@ -218,6 +219,8 @@ button {
     padding: 20px;
     overflow-y: auto;
     position: relative; /* Add this line */
+    min-width: 300px;
+    min-height: 300px;
 }
 
 
@@ -251,19 +254,6 @@ button {
 
 .tour-details p strong {
     color: #8CB323; /* Use the specified green color for the strong text */
-}
-
-.edit {
-    background-color: #00689E;
-    color: #FFFFFF;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    position: absolute; /* Use absolute positioning */
-    bottom: 10px; /* Position 10px from the bottom */
-    right: 10px; /* Position 10px from the right */
 }
 
 
@@ -318,6 +308,93 @@ button {
 }
 
 #map {
-    min-height: 300px; /* Adjust as needed */
-    max-width: 300px;
+    min-height: 300px; /* Fixed height */
+    width: 100%; /* Fixed width */
+    position: relative; /* Ensure it does not resize */
+}
+
+
+.edit {
+    background-color: #00689E;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    bottom: 10px;
+    right: 10px;
+}
+
+
+
+
+
+.log-list {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+}
+
+.log-list li {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #8CB323;
+    border-radius: 5px;
+}
+
+.log-list li p {
+    margin: 5px 0;
+}
+
+.log-list button {
+    margin-right: 5px;
+    background-color: #00689E;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.log-list button:last-child {
+    background-color: #9E0000;
+}
+
+.log-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.log-form label {
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    color: #333;
+}
+
+.log-form input, .log-form textarea {
+    padding: 5px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.form-buttons {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.add-log {
+    background-color: #8CB323;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
 }

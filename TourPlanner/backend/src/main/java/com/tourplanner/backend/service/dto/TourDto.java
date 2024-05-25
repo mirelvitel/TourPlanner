@@ -20,4 +20,8 @@ public class TourDto {
     private String endLocation;
     private String startLocation;
     private List<TourLogDto> tourLogs;
+
+    // Computed attributes
+    private int popularity;
+    private double childFriendliness;
 }
