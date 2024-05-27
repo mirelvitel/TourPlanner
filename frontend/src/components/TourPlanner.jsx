@@ -62,7 +62,7 @@ const TourPlanner = () => {
 
     useEffect(() => {
         if (activeTour !== null && mapInstance.current) {
-            const tour = tours[activeTour];
+            const tour = filteredTours[activeTour];
             // Geocode the location to get coordinates
             axios.get(`https://api.openrouteservice.org/geocode/search?api_key=5b3ce3597851110001cf6248f37a7f9f82f745b18af812787f0fb20f&text=${tour.name}`)
                 .then(response => {
@@ -92,7 +92,7 @@ const TourPlanner = () => {
             setTourLogs([]);
             setFilteredLogs([]);
         }
-    }, [activeTour, tours]);
+    }, [activeTour, filteredTours]);
 
     const handleInputChange = (e, isEdit = false, isLog = false) => {
         const { name, value } = e.target;
@@ -244,7 +244,7 @@ const TourPlanner = () => {
     const handleDeleteLog = (logId) => {
         const confirmDelete = window.confirm("Are you sure you want to delete this tour log?");
         if (confirmDelete) {
-            axios.delete(`/api/tour/${tours[activeTour].id}/log/${logId}`)
+            axios.delete(`/api/tour/${filteredTours[activeTour].id}/log/${logId}`)
                 .then(response => {
                     const updatedLogs = tourLogs.filter(log => log.id !== logId);
                     setTourLogs(updatedLogs);
@@ -259,7 +259,7 @@ const TourPlanner = () => {
 
     const handleEditClick = () => {
         setEditMode(true);
-        setEditTour(tours[activeTour]);
+        setEditTour(filteredTours[activeTour]);
     };
 
     const handleEditLogClick = (log) => {
@@ -271,7 +271,7 @@ const TourPlanner = () => {
         const query = e.target.value.toLowerCase();
         setSearchQuery(query);
         if (query) {
-            setFilteredTours(tours.filter(tour =>
+            const filteredTours = tours.filter(tour =>
                 tour.name.toLowerCase().includes(query) ||
                 tour.tourDescription.toLowerCase().includes(query) ||
                 tour.startLocation.toLowerCase().includes(query) ||
@@ -279,7 +279,8 @@ const TourPlanner = () => {
                 tour.transportType.toLowerCase().includes(query) ||
                 tour.popularity.toString().includes(query) ||
                 tour.childFriendliness.toString().includes(query)
-            ));
+            );
+            setFilteredTours(filteredTours);
             setFilteredLogs(tourLogs.filter(log =>
                 log.comment.toLowerCase().includes(query) ||
                 log.dateTime.toLowerCase().includes(query) ||
@@ -431,14 +432,14 @@ const TourPlanner = () => {
                                     </form>
                                 ) : (
                                     <div className="tour-details">
-                                        <h3>{tours[activeTour].name} Tour</h3>
-                                        <p><strong>Distance:</strong> {tours[activeTour].tourDistance} km</p>
-                                        <p><strong>Description:</strong> {tours[activeTour].tourDescription}</p>
-                                        <p><strong>Start Location:</strong> {tours[activeTour].startLocation}</p>
-                                        <p><strong>End Location:</strong> {tours[activeTour].endLocation}</p>
-                                        <p><strong>Transport Type:</strong> {tours[activeTour].transportType}</p>
-                                        <p><strong>Popularity:</strong> {tours[activeTour].popularity}</p>
-                                        <p><strong>Child Friendliness:</strong> {tours[activeTour].childFriendliness.toFixed(2)}</p>
+                                        <h3>{filteredTours[activeTour].name} Tour</h3>
+                                        <p><strong>Distance:</strong> {filteredTours[activeTour].tourDistance} km</p>
+                                        <p><strong>Description:</strong> {filteredTours[activeTour].tourDescription}</p>
+                                        <p><strong>Start Location:</strong> {filteredTours[activeTour].startLocation}</p>
+                                        <p><strong>End Location:</strong> {filteredTours[activeTour].endLocation}</p>
+                                        <p><strong>Transport Type:</strong> {filteredTours[activeTour].transportType}</p>
+                                        <p><strong>Popularity:</strong> {filteredTours[activeTour].popularity}</p>
+                                        <p><strong>Child Friendliness:</strong> {filteredTours[activeTour].childFriendliness.toFixed(2)}</p>
                                         <button className="edit" onClick={handleEditClick}>Edit</button>
 
                                         <h3>Tour Logs</h3>

@@ -8,6 +8,7 @@ import com.tourplanner.backend.service.dto.TourDto;
 import com.tourplanner.backend.service.dto.TourLogDto;
 import com.tourplanner.backend.service.mapper.TourMapper;
 import jakarta.persistence.EntityNotFoundException;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -26,37 +27,50 @@ public class TourServiceImpl implements TourService {
     @Autowired
     private TourLogService tourLogService;
 
+    private static final Logger logger = Logger.getLogger(TourServiceImpl.class);
+
     @Override
     public void addNewTour(TourDto tourDto) {
         TourEntity entity = mapToEntity(tourDto);
         tourRepository.save(entity);
+        logger.info("New tour added: " + tourDto.getName());
     }
 
     @Override
     public void deleteTourById(Long id) {
-        tourRepository.deleteById(id);
+        try {
+            tourRepository.deleteById(id);
+            logger.info("Tour deleted with id: " + id);
+        } catch (Exception e) {
+            logger.error("Error deleting tour with id: " + id, e);
+        }
     }
 
     @Override
     public void updateTour(TourDto tourDto) {
         TourEntity entity = mapToEntity(tourDto);
         tourRepository.save(entity);
+        logger.info("Tour updated: " + tourDto.getName());
     }
 
     @Override
     public TourDto getTourById(Long id) {
-        System.out.println("ServiceImpl");
+        logger.info("Fetching tour with id: " + id);
         TourEntity tourEntity = tourRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Tour not found with id " + id));
+        logger.info("Tour found: " + tourEntity.getName());
         return computeAttributes(tourMapper.mapToDto(tourEntity));
     }
 
     @Override
     public List<TourDto> getAllTours() {
-        return tourRepository.findAll().stream()
+        logger.info("Fetching all tours");
+        List<TourDto> tours = tourRepository.findAll().stream()
                 .map(tourMapper::mapToDto)
                 .map(this::computeAttributes)
                 .collect(Collectors.toList());
+        logger.info("Total tours found: " + tours.size());
+        return tours;
     }
 
     private TourEntity mapToEntity(TourDto tourDto) {

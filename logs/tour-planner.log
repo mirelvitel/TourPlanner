@@ -1,0 +1,132 @@
+2024-05-27 22:52:52 INFO  TourServiceImpl:67 - Fetching all tours
+2024-05-27 22:52:52 INFO  TourServiceImpl:67 - Fetching all tours
+2024-05-27 22:52:52 INFO  TourLogServiceImpl:39 - Fetching tour logs for tour id: 45
+2024-05-27 22:52:52 INFO  TourLogServiceImpl:39 - Fetching tour logs for tour id: 45
+2024-05-27 22:52:52 INFO  TourLogServiceImpl:44 - Total tour logs found for tour id 45: 0
+2024-05-27 22:52:52 INFO  TourLogServiceImpl:44 - Total tour logs found for tour id 45: 0
+2024-05-27 22:52:52 INFO  TourLogServiceImpl:39 - Fetching tour logs for tour id: 13
+2024-05-27 22:52:52 INFO  TourLogServiceImpl:39 - Fetching tour logs for tour id: 13
+2024-05-27 22:52:52 INFO  TourLogServiceImpl:44 - Total tour logs found for tour id 13: 0
+2024-05-27 22:52:52 INFO  TourLogServiceImpl:44 - Total tour logs found for tour id 13: 0
+2024-05-27 22:52:52 INFO  TourLogServiceImpl:39 - Fetching tour logs for tour id: 14
+2024-05-27 22:52:52 INFO  TourLogServiceImpl:39 - Fetching tour logs for tour id: 14
+2024-05-27 22:52:52 INFO  TourLogServiceImpl:44 - Total tour logs found for tour id 14: 0
+2024-05-27 22:52:52 INFO  TourLogServiceImpl:39 - Fetching tour logs for tour id: 37
+2024-05-27 22:52:52 INFO  TourLogServiceImpl:44 - Total tour logs found for tour id 14: 0
+2024-05-27 22:52:52 INFO  TourLogServiceImpl:39 - Fetching tour logs for tour id: 37
+2024-05-27 22:52:52 INFO  TourLogServiceImpl:44 - Total tour logs found for tour id 37: 0
+2024-05-27 22:52:52 INFO  TourLogServiceImpl:39 - Fetching tour logs for tour id: 36
+2024-05-27 22:52:52 INFO  TourLogServiceImpl:44 - Total tour logs found for tour id 37: 0
+2024-05-27 22:52:52 INFO  TourLogServiceImpl:39 - Fetching tour logs for tour id: 36
+2024-05-27 22:52:52 INFO  TourLogServiceImpl:44 - Total tour logs found for tour id 36: 1
+2024-05-27 22:52:52 INFO  TourLogServiceImpl:44 - Total tour logs found for tour id 36: 1
+2024-05-27 22:52:52 INFO  TourLogServiceImpl:39 - Fetching tour logs for tour id: 38
+2024-05-27 22:52:52 INFO  TourLogServiceImpl:39 - Fetching tour logs for tour id: 38
+2024-05-27 22:52:52 INFO  TourLogServiceImpl:44 - Total tour logs found for tour id 38: 0
+2024-05-27 22:52:52 INFO  TourLogServiceImpl:39 - Fetching tour logs for tour id: 39
+2024-05-27 22:52:52 INFO  TourLogServiceImpl:44 - Total tour logs found for tour id 38: 0
+2024-05-27 22:52:52 INFO  TourLogServiceImpl:39 - Fetching tour logs for tour id: 39
+2024-05-27 22:52:52 INFO  TourLogServiceImpl:44 - Total tour logs found for tour id 39: 1
+2024-05-27 22:52:52 INFO  TourLogServiceImpl:44 - Total tour logs found for tour id 39: 1
+2024-05-27 22:52:52 INFO  TourLogServiceImpl:39 - Fetching tour logs for tour id: 12
+2024-05-27 22:52:52 INFO  TourLogServiceImpl:39 - Fetching tour logs for tour id: 12
+2024-05-27 22:52:52 INFO  TourLogServiceImpl:44 - Total tour logs found for tour id 12: 3
+2024-05-27 22:52:52 INFO  TourLogServiceImpl:44 - Total tour logs found for tour id 12: 3
+2024-05-27 22:52:52 INFO  TourLogServiceImpl:39 - Fetching tour logs for tour id: 42
+2024-05-27 22:52:52 INFO  TourLogServiceImpl:39 - Fetching tour logs for tour id: 42
+2024-05-27 22:52:52 INFO  TourLogServiceImpl:44 - Total tour logs found for tour id 42: 0
+2024-05-27 22:52:52 INFO  TourLogServiceImpl:44 - Total tour logs found for tour id 42: 0
+2024-05-27 22:52:52 INFO  TourServiceImpl:72 - Total tours found: 9
+2024-05-27 22:52:52 INFO  TourServiceImpl:72 - Total tours found: 9
+
+2024-05-27 22:53:09 INFO  TourLogServiceImpl:39 - Fetching tour logs for tour id: 13
+2024-05-27 22:53:09 INFO  TourLogServiceImpl:44 - Total tour logs found for tour id 13: 0
+2024-05-27 22:53:40 INFO  TourLogServiceImpl:34 - Tour log added: proba
+2024-05-27 22:53:52 INFO  TourServiceImpl:67 - Fetching all tours
+2024-05-27 22:53:52 INFO  TourServiceImpl:67 - Fetching all tours
+2024-05-27 22:53:52 INFO  TourLogServiceImpl:39 - Fetching tour logs for tour id: 45
+2024-05-27 22:53:52 INFO  TourLogServiceImpl:39 - Fetching tour logs for tour id: 45
+2024-05-27 22:53:52 INFO  TourLogServiceImpl:44 - Total tour logs found for tour id 45: 0
+2024-05-27 22:53:52 INFO  TourLogServiceImpl:39 - Fetching tour logs for tour id: 13
+2024-05-27 22:53:52 INFO  TourLogServiceImpl:44 - Total tour logs found for tour id 45: 0
+2024-05-27 22:53:52 INFO  TourLogServiceImpl:39 - Fetching tour logs for tour id: 13
+2024-05-27 22:53:52 INFO  TourLogServiceImpl:44 - Total tour logs found for tour id 13: 1
+2024-05-27 22:53:52 INFO  TourLogServiceImpl:39 - Fetching tour logs for tour id: 14
+2024-05-27 22:53:52 INFO  TourLogServiceImpl:44 - Total tour logs found for tour id 13: 1
+2024-05-27 22:53:52 INFO  TourLogServiceImpl:39 - Fetching tour logs for tour id: 14
+2024-05-27 22:53:52 INFO  TourLogServiceImpl:44 - Total tour logs found for tour id 14: 0
+2024-05-27 22:53:52 INFO  TourLogServiceImpl:44 - Total tour logs found for tour id 14: 0
+2024-05-27 22:53:52 INFO  TourLogServiceImpl:39 - Fetching tour logs for tour id: 37
+2024-05-27 22:53:52 INFO  TourLogServiceImpl:39 - Fetching tour logs for tour id: 37
+2024-05-27 22:53:52 INFO  TourLogServiceImpl:44 - Total tour logs found for tour id 37: 0
+2024-05-27 22:53:52 INFO  TourLogServiceImpl:44 - Total tour logs found for tour id 37: 0
+2024-05-27 22:53:52 INFO  TourLogServiceImpl:39 - Fetching tour logs for tour id: 36
+2024-05-27 22:53:52 INFO  TourLogServiceImpl:39 - Fetching tour logs for tour id: 36
+2024-05-27 22:53:52 INFO  TourLogServiceImpl:44 - Total tour logs found for tour id 36: 1
+2024-05-27 22:53:52 INFO  TourLogServiceImpl:44 - Total tour logs found for tour id 36: 1
+2024-05-27 22:53:52 INFO  TourLogServiceImpl:39 - Fetching tour logs for tour id: 38
+2024-05-27 22:53:52 INFO  TourLogServiceImpl:39 - Fetching tour logs for tour id: 38
+2024-05-27 22:53:52 INFO  TourLogServiceImpl:44 - Total tour logs found for tour id 38: 0
+2024-05-27 22:53:52 INFO  TourLogServiceImpl:44 - Total tour logs found for tour id 38: 0
+2024-05-27 22:53:52 INFO  TourLogServiceImpl:39 - Fetching tour logs for tour id: 39
+2024-05-27 22:53:52 INFO  TourLogServiceImpl:39 - Fetching tour logs for tour id: 39
+2024-05-27 22:53:52 INFO  TourLogServiceImpl:44 - Total tour logs found for tour id 39: 1
+2024-05-27 22:53:52 INFO  TourLogServiceImpl:44 - Total tour logs found for tour id 39: 1
+2024-05-27 22:53:52 INFO  TourLogServiceImpl:39 - Fetching tour logs for tour id: 12
+2024-05-27 22:53:52 INFO  TourLogServiceImpl:39 - Fetching tour logs for tour id: 12
+2024-05-27 22:53:52 INFO  TourLogServiceImpl:44 - Total tour logs found for tour id 12: 3
+2024-05-27 22:53:52 INFO  TourLogServiceImpl:44 - Total tour logs found for tour id 12: 3
+2024-05-27 22:53:52 INFO  TourLogServiceImpl:39 - Fetching tour logs for tour id: 42
+2024-05-27 22:53:52 INFO  TourLogServiceImpl:39 - Fetching tour logs for tour id: 42
+2024-05-27 22:53:52 INFO  TourLogServiceImpl:44 - Total tour logs found for tour id 42: 0
+2024-05-27 22:53:52 INFO  TourServiceImpl:72 - Total tours found: 9
+2024-05-27 22:53:52 INFO  TourLogServiceImpl:44 - Total tour logs found for tour id 42: 0
+2024-05-27 22:53:52 INFO  TourServiceImpl:72 - Total tours found: 9
+2024-05-27 22:53:54 INFO  TourLogServiceImpl:39 - Fetching tour logs for tour id: 13
+2024-05-27 22:53:54 INFO  TourLogServiceImpl:44 - Total tour logs found for tour id 13: 1
+2024-05-27 22:59:52 INFO  TourServiceImpl:67 - Fetching all tours
+2024-05-27 22:59:52 INFO  TourServiceImpl:67 - Fetching all tours
+2024-05-27 22:59:52 INFO  TourLogServiceImpl:39 - Fetching tour logs for tour id: 45
+2024-05-27 22:59:52 INFO  TourLogServiceImpl:44 - Total tour logs found for tour id 45: 0
+2024-05-27 22:59:52 INFO  TourLogServiceImpl:39 - Fetching tour logs for tour id: 13
+2024-05-27 22:59:52 INFO  TourLogServiceImpl:39 - Fetching tour logs for tour id: 45
+2024-05-27 22:59:52 INFO  TourLogServiceImpl:44 - Total tour logs found for tour id 13: 1
+2024-05-27 22:59:52 INFO  TourLogServiceImpl:39 - Fetching tour logs for tour id: 14
+2024-05-27 22:59:52 INFO  TourLogServiceImpl:44 - Total tour logs found for tour id 14: 0
+2024-05-27 22:59:52 INFO  TourLogServiceImpl:44 - Total tour logs found for tour id 45: 0
+2024-05-27 22:59:52 INFO  TourLogServiceImpl:39 - Fetching tour logs for tour id: 37
+2024-05-27 22:59:52 INFO  TourLogServiceImpl:39 - Fetching tour logs for tour id: 13
+2024-05-27 22:59:52 INFO  TourLogServiceImpl:44 - Total tour logs found for tour id 37: 0
+2024-05-27 22:59:52 INFO  TourLogServiceImpl:39 - Fetching tour logs for tour id: 36
+2024-05-27 22:59:52 INFO  TourLogServiceImpl:44 - Total tour logs found for tour id 13: 1
+2024-05-27 22:59:52 INFO  TourLogServiceImpl:39 - Fetching tour logs for tour id: 14
+2024-05-27 22:59:52 INFO  TourLogServiceImpl:44 - Total tour logs found for tour id 36: 1
+2024-05-27 22:59:52 INFO  TourLogServiceImpl:39 - Fetching tour logs for tour id: 38
+2024-05-27 22:59:52 INFO  TourLogServiceImpl:44 - Total tour logs found for tour id 14: 0
+2024-05-27 22:59:52 INFO  TourLogServiceImpl:39 - Fetching tour logs for tour id: 37
+2024-05-27 22:59:52 INFO  TourLogServiceImpl:44 - Total tour logs found for tour id 38: 0
+2024-05-27 22:59:52 INFO  TourLogServiceImpl:39 - Fetching tour logs for tour id: 39
+2024-05-27 22:59:52 INFO  TourLogServiceImpl:44 - Total tour logs found for tour id 37: 0
+2024-05-27 22:59:52 INFO  TourLogServiceImpl:39 - Fetching tour logs for tour id: 36
+2024-05-27 22:59:52 INFO  TourLogServiceImpl:44 - Total tour logs found for tour id 39: 1
+2024-05-27 22:59:52 INFO  TourLogServiceImpl:39 - Fetching tour logs for tour id: 12
+2024-05-27 22:59:52 INFO  TourLogServiceImpl:44 - Total tour logs found for tour id 36: 1
+2024-05-27 22:59:52 INFO  TourLogServiceImpl:39 - Fetching tour logs for tour id: 38
+2024-05-27 22:59:52 INFO  TourLogServiceImpl:44 - Total tour logs found for tour id 12: 3
+2024-05-27 22:59:52 INFO  TourLogServiceImpl:39 - Fetching tour logs for tour id: 42
+2024-05-27 22:59:52 INFO  TourLogServiceImpl:44 - Total tour logs found for tour id 38: 0
+2024-05-27 22:59:52 INFO  TourLogServiceImpl:39 - Fetching tour logs for tour id: 39
+2024-05-27 22:59:52 INFO  TourLogServiceImpl:44 - Total tour logs found for tour id 42: 0
+2024-05-27 22:59:52 INFO  TourLogServiceImpl:44 - Total tour logs found for tour id 39: 1
+2024-05-27 22:59:52 INFO  TourServiceImpl:72 - Total tours found: 9
+2024-05-27 22:59:52 INFO  TourLogServiceImpl:39 - Fetching tour logs for tour id: 12
+2024-05-27 22:59:52 INFO  TourLogServiceImpl:44 - Total tour logs found for tour id 12: 3
+2024-05-27 22:59:52 INFO  TourLogServiceImpl:39 - Fetching tour logs for tour id: 42
+2024-05-27 22:59:52 INFO  TourLogServiceImpl:44 - Total tour logs found for tour id 42: 0
+2024-05-27 22:59:52 INFO  TourServiceImpl:72 - Total tours found: 9
+2024-05-27 22:59:55 INFO  TourLogServiceImpl:39 - Fetching tour logs for tour id: 45
+2024-05-27 22:59:55 INFO  TourLogServiceImpl:44 - Total tour logs found for tour id 45: 0
+2024-05-27 23:00:13 INFO  TourLogServiceImpl:39 - Fetching tour logs for tour id: 42
+2024-05-27 23:00:14 INFO  TourLogServiceImpl:44 - Total tour logs found for tour id 42: 0
+2024-05-27 23:00:14 INFO  TourLogServiceImpl:39 - Fetching tour logs for tour id: 12
+2024-05-27 23:00:14 INFO  TourLogServiceImpl:44 - Total tour logs found for tour id 12: 3
