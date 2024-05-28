@@ -295,6 +295,60 @@ const TourPlanner = () => {
         }
     };
 
+    const handleDownloadTourReport = () => {
+        if (activeTour !== null) {
+            const tourId = tours[activeTour].id;
+            console.log(`Requesting tour report for tour ID: ${tourId}`);
+            axios.get(`/api/tour/report/${tourId}`, { responseType: 'blob' })
+                .then(response => {
+                    console.log('Tour report response:', response);
+                    if (response.status === 200) {
+                        const url = window.URL.createObjectURL(new Blob([response.data]));
+                        const link = document.createElement('a');
+                        link.href = url;
+                        link.setAttribute('download', 'tour_report.pdf');
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link); // Clean up
+                    } else {
+                        console.error('Failed to download the tour report:', response.status, response.statusText);
+                    }
+                })
+                .catch(error => {
+                    console.error('There was an error generating the tour report!', error);
+                });
+        } else {
+            console.error('No tour selected');
+        }
+    };
+
+    const handleDownloadSummaryReport = () => {
+        console.log('Requesting summary report');
+        axios.get('/api/tour/summary-report', { responseType: 'blob' })
+            .then(response => {
+                console.log('Summary report response:', response);
+                if (response.status === 200) {
+                    const url = window.URL.createObjectURL(new Blob([response.data]));
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.setAttribute('download', 'summary_report.pdf');
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link); // Clean up
+                } else {
+                    console.error('Failed to download the summary report:', response.status, response.statusText);
+                }
+            })
+            .catch(error => {
+                console.error('There was an error generating the summary report!', error);
+                if (error.response) {
+                    console.error('Error response data:', error.response.data);
+                    console.error('Error response status:', error.response.status);
+                    console.error('Error response headers:', error.response.headers);
+                }
+            });
+    };
+
     return (
         <div className="main-container">
             <h1 className="heading">Tour Planner</h1>
@@ -359,6 +413,10 @@ const TourPlanner = () => {
                             <div className="buttons">
                                 <button className="add" onClick={() => setShowForm(true)}>Add</button>
                                 <button className="delete" onClick={handleDeleteTour}>Delete</button>
+                                {activeTour !== null && (
+                                    <button onClick={handleDownloadTourReport}>Download Tour Report</button>
+                                )}
+                                <button onClick={handleDownloadSummaryReport}>Download Summary Report</button>
                             </div>
                         </>
                     )}

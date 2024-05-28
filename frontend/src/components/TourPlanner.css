@@ -111,6 +111,7 @@ body {
 
 .tour-list li.active {
     color: #99cc00;
+    background-color: #f0f0f0;
 }
 
 .tour-form {
@@ -168,8 +169,8 @@ body {
 
 .buttons {
     display: flex;
-    justify-content: space-between;
-    padding-top: 10px;
+    flex-direction: column;
+    gap: 10px;
 }
 
 button {
@@ -177,7 +178,7 @@ button {
     cursor: pointer;
 }
 
-.add, .delete {
+.add, .delete, .download-report, .download-summary {
     border: none;
     border-radius: 5px;
     font-style: normal;
@@ -186,6 +187,7 @@ button {
     line-height: 19px;
     color: #FFFFFF;
     padding: 5px 10px;
+    cursor: pointer;
 }
 
 .add {
@@ -194,6 +196,14 @@ button {
 
 .delete {
     background: #9E0000;
+}
+
+.download-report {
+    background: #00689E;
+}
+
+.download-summary {
+    background: #FFA500;
 }
 
 .right-container {
