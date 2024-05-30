@@ -296,8 +296,8 @@ const TourPlanner = () => {
     };
 
     const handleDownloadTourReport = () => {
-        if (activeTour !== null) {
-            const tourId = tours[activeTour].id;
+        if (activeTour !== null && filteredTours[activeTour]) {
+            const tourId = filteredTours[activeTour].id;
             console.log(`Requesting tour report for tour ID: ${tourId}`);
             axios.get(`/api/tour/report/${tourId}`, { responseType: 'blob' })
                 .then(response => {
@@ -318,9 +318,10 @@ const TourPlanner = () => {
                     console.error('There was an error generating the tour report!', error);
                 });
         } else {
-            console.error('No tour selected');
+            console.error('No tour selected or tour not found');
         }
     };
+
 
     const handleDownloadSummaryReport = () => {
         console.log('Requesting summary report');
