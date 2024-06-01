@@ -63,18 +63,105 @@ const TourPlanner = () => {
     useEffect(() => {
         if (activeTour !== null && mapInstance.current) {
             const tour = filteredTours[activeTour];
-            // Geocode the location to get coordinates
-            axios.get(`https://api.openrouteservice.org/geocode/search?api_key=5b3ce3597851110001cf6248f37a7f9f82f745b18af812787f0fb20f&text=${tour.name}`)
-                .then(response => {
+            const cityName = tour.name; // Assuming tour.name is the city name
+            const startLocation = `${tour.startLocation}, ${cityName}`;
+            const endLocation = `${tour.endLocation}, ${cityName}`;
+
+            // Function to fetch the route coordinates and draw the route
+            const fetchAndDrawRoute = async (start, end) => {
+                try {
+                    // Geocode start and end locations to get coordinates
+                    const geocodeStart = await axios.get(`https://api.openrouteservice.org/geocode/search`, {
+                        params: {
+                            api_key: '5b3ce3597851110001cf6248f37a7f9f82f745b18af812787f0fb20f',
+                            text: start
+                        }
+                    });
+                    const geocodeEnd = await axios.get(`https://api.openrouteservice.org/geocode/search`, {
+                        params: {
+                            api_key: '5b3ce3597851110001cf6248f37a7f9f82f745b18af812787f0fb20f',
+                            text: end
+                        }
+                    });
+
+                    console.log('Geocode Start Response:', geocodeStart.data);
+                    console.log('Geocode End Response:', geocodeEnd.data);
+
+                    // Filter features to ensure the city name matches
+                    const filterFeaturesByCity = (features, city) => {
+                        return features.filter(feature => feature.properties.label.includes(city));
+                    };
+
+                    const startFeatures = filterFeaturesByCity(geocodeStart.data.features, cityName);
+                    const endFeatures = filterFeaturesByCity(geocodeEnd.data.features, cityName);
+
+                    if (!startFeatures.length || !endFeatures.length) {
+                        console.error('Geocoding failed: No matching features found');
+                        return;
+                    }
+
+                    const startCoords = startFeatures[0].geometry.coordinates;
+                    const endCoords = endFeatures[0].geometry.coordinates;
+
+                    // Log the coordinates
+                    console.log('Start Coordinates:', startCoords);
+                    console.log('End Coordinates:', endCoords);
+
+                    // Reverse geocode the coordinates to verify locations
+                    const reverseGeocodeStart = await axios.get(`https://api.openrouteservice.org/geocode/reverse`, {
+                        params: {
+                            api_key: '5b3ce3597851110001cf6248f37a7f9f82f745b18af812787f0fb20f',
+                            'point.lat': startCoords[1],
+                            'point.lon': startCoords[0]
+                        }
+                    });
+                    const reverseGeocodeEnd = await axios.get(`https://api.openrouteservice.org/geocode/reverse`, {
+                        params: {
+                            api_key: '5b3ce3597851110001cf6248f37a7f9f82f745b18af812787f0fb20f',
+                            'point.lat': endCoords[1],
+                            'point.lon': endCoords[0]
+                        }
+                    });
+
+                    console.log('Verified Start Location:', reverseGeocodeStart.data.features[0].properties.label);
+                    console.log('Verified End Location:', reverseGeocodeEnd.data.features[0].properties.label);
+
+                    const startCoordStr = `${startCoords[0]},${startCoords[1]}`;
+                    const endCoordStr = `${endCoords[0]},${endCoords[1]}`;
+
+                    const response = await axios.get(`https://api.openrouteservice.org/v2/directions/driving-car`, {
+                        params: {
+                            api_key: '5b3ce3597851110001cf6248f37a7f9f82f745b18af812787f0fb20f',
+                            start: startCoordStr,
+                            end: endCoordStr
+                        }
+                    });
                     const coordinates = response.data.features[0].geometry.coordinates;
-                    const lat = coordinates[1];
-                    const lon = coordinates[0];
-                    mapInstance.current.setView([lat, lon], 13);
-                    L.marker([lat, lon]).addTo(mapInstance.current);
-                })
-                .catch(error => {
-                    console.error('There was an error geocoding the location!', error);
-                });
+
+                    const latLngs = coordinates.map(coord => [coord[1], coord[0]]);
+                    mapInstance.current.setView(latLngs[0], 13);
+
+                    // Clear existing layers
+                    mapInstance.current.eachLayer(layer => {
+                        if (layer instanceof L.Polyline || layer instanceof L.Marker) {
+                            mapInstance.current.removeLayer(layer);
+                        }
+                    });
+
+                    // Draw the route
+                    const polyline = L.polyline(latLngs, { color: 'red' }).addTo(mapInstance.current);
+
+                    // Add markers at start and end points
+                    L.marker(latLngs[0]).addTo(mapInstance.current);
+                    L.marker(latLngs[latLngs.length - 1]).addTo(mapInstance.current);
+                } catch (error) {
+                    console.error('There was an error fetching the route!', error);
+                    console.error('Error details:', error.response ? error.response.data : error.message);
+                }
+            };
+
+            // Fetch route coordinates and draw the route
+            fetchAndDrawRoute(startLocation, endLocation);
 
             // Fetch tour logs for the selected tour
             axios.get(`/api/tour/${tour.id}/log`)
@@ -93,6 +180,7 @@ const TourPlanner = () => {
             setFilteredLogs([]);
         }
     }, [activeTour, filteredTours]);
+
 
     const handleInputChange = (e, isEdit = false, isLog = false) => {
         const { name, value } = e.target;
@@ -321,7 +409,6 @@ const TourPlanner = () => {
             console.error('No tour selected or tour not found');
         }
     };
-
 
     const handleDownloadSummaryReport = () => {
         console.log('Requesting summary report');
