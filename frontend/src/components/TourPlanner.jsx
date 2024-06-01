@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import L from 'leaflet';
 import './TourPlanner.css';
+import Weather from './Weather.jsx';
 
 const TourPlanner = () => {
     const [tours, setTours] = useState([]);
@@ -14,6 +15,8 @@ const TourPlanner = () => {
     const [filteredLogs, setFilteredLogs] = useState([]);
     const [showLogForm, setShowLogForm] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
+    const [latitude, setLatitude] = useState(null); // Define state for latitude
+    const [longitude, setLongitude] = useState(null); // Define state for longitude
     const [newTour, setNewTour] = useState({
         name: '',
         tourDistance: '',
@@ -63,7 +66,7 @@ const TourPlanner = () => {
     useEffect(() => {
         if (activeTour !== null && mapInstance.current) {
             const tour = filteredTours[activeTour];
-            const cityName = tour.name; // Assuming tour.name is the city name
+            const cityName = tour.name;
             const startLocation = `${tour.startLocation}, ${cityName}`;
             const endLocation = `${tour.endLocation}, ${cityName}`;
 
@@ -84,16 +87,8 @@ const TourPlanner = () => {
                         }
                     });
 
-                    console.log('Geocode Start Response:', geocodeStart.data);
-                    console.log('Geocode End Response:', geocodeEnd.data);
-
-                    // Filter features to ensure the city name matches
-                    const filterFeaturesByCity = (features, city) => {
-                        return features.filter(feature => feature.properties.label.includes(city));
-                    };
-
-                    const startFeatures = filterFeaturesByCity(geocodeStart.data.features, cityName);
-                    const endFeatures = filterFeaturesByCity(geocodeEnd.data.features, cityName);
+                    const startFeatures = geocodeStart.data.features;
+                    const endFeatures = geocodeEnd.data.features;
 
                     if (!startFeatures.length || !endFeatures.length) {
                         console.error('Geocoding failed: No matching features found');
@@ -103,37 +98,11 @@ const TourPlanner = () => {
                     const startCoords = startFeatures[0].geometry.coordinates;
                     const endCoords = endFeatures[0].geometry.coordinates;
 
-                    // Log the coordinates
-                    console.log('Start Coordinates:', startCoords);
-                    console.log('End Coordinates:', endCoords);
-
-                    // Reverse geocode the coordinates to verify locations
-                    const reverseGeocodeStart = await axios.get(`https://api.openrouteservice.org/geocode/reverse`, {
-                        params: {
-                            api_key: '5b3ce3597851110001cf6248f37a7f9f82f745b18af812787f0fb20f',
-                            'point.lat': startCoords[1],
-                            'point.lon': startCoords[0]
-                        }
-                    });
-                    const reverseGeocodeEnd = await axios.get(`https://api.openrouteservice.org/geocode/reverse`, {
-                        params: {
-                            api_key: '5b3ce3597851110001cf6248f37a7f9f82f745b18af812787f0fb20f',
-                            'point.lat': endCoords[1],
-                            'point.lon': endCoords[0]
-                        }
-                    });
-
-                    console.log('Verified Start Location:', reverseGeocodeStart.data.features[0].properties.label);
-                    console.log('Verified End Location:', reverseGeocodeEnd.data.features[0].properties.label);
-
-                    const startCoordStr = `${startCoords[0]},${startCoords[1]}`;
-                    const endCoordStr = `${endCoords[0]},${endCoords[1]}`;
-
                     const response = await axios.get(`https://api.openrouteservice.org/v2/directions/driving-car`, {
                         params: {
                             api_key: '5b3ce3597851110001cf6248f37a7f9f82f745b18af812787f0fb20f',
-                            start: startCoordStr,
-                            end: endCoordStr
+                            start: `${startCoords[0]},${startCoords[1]}`,
+                            end: `${endCoords[0]},${endCoords[1]}`
                         }
                     });
                     const coordinates = response.data.features[0].geometry.coordinates;
@@ -154,19 +123,24 @@ const TourPlanner = () => {
                     // Add markers at start and end points
                     L.marker(latLngs[0]).addTo(mapInstance.current);
                     L.marker(latLngs[latLngs.length - 1]).addTo(mapInstance.current);
+
+                    // Fetch and display weather data
+                    const weatherData = await fetchWeather(startCoords[1], startCoords[0]);
+                    if (weatherData) {
+                        console.log('Weather Data:', weatherData);
+                        alert(`Current temperature: ${weatherData.hourly.temperature_2m[0]}°C`);
+                    }
+
                 } catch (error) {
                     console.error('There was an error fetching the route!', error);
                     console.error('Error details:', error.response ? error.response.data : error.message);
                 }
             };
 
-            // Fetch route coordinates and draw the route
             fetchAndDrawRoute(startLocation, endLocation);
 
-            // Fetch tour logs for the selected tour
             axios.get(`/api/tour/${tour.id}/log`)
                 .then(response => {
-                    console.log('Fetched tour logs:', response.data);
                     setTourLogs(response.data);
                     setFilteredLogs(response.data);
                 })
@@ -174,7 +148,6 @@ const TourPlanner = () => {
                     console.error('There was an error fetching the tour logs!', error);
                 });
         } else if (mapInstance.current) {
-            // If no tour is selected, reset to the world view
             mapInstance.current.setView([0, 0], 2);
             setTourLogs([]);
             setFilteredLogs([]);
@@ -210,6 +183,23 @@ const TourPlanner = () => {
             }
         }
     };
+
+    const fetchWeather = async (latitude, longitude) => {
+        try {
+            const response = await axios.get(`https://api.open-meteo.com/v1/forecast`, {
+                params: {
+                    latitude,
+                    longitude,
+                    hourly: 'temperature_2m,precipitation'
+                }
+            });
+            return response.data;
+        } catch (error) {
+            console.error('There was an error fetching the weather data!', error);
+            return null;
+        }
+    };
+
 
     const validateTour = (tour) => {
         if (tour.tourDistance < 1 || tour.tourDistance > 100) {
@@ -439,6 +429,9 @@ const TourPlanner = () => {
 
     return (
         <div className="main-container">
+            {latitude && longitude && (
+                <Weather latitude={latitude} longitude={longitude} />
+            )}
             <h1 className="heading">Tour Planner</h1>
             <div className="content-container">
                 <div className="left-container">
