@@ -31,6 +31,9 @@ public class TourServiceImpl implements TourService {
 
     @Override
     public void addNewTour(TourDto tourDto) {
+        if (tourDto.getName() == null || tourDto.getName().isEmpty()) {
+            throw new RuntimeException("Tour name cannot be null or empty");
+        }
         TourEntity entity = mapToEntity(tourDto);
         tourRepository.save(entity);
         logger.info("New tour added: " + tourDto.getName());
@@ -85,7 +88,7 @@ public class TourServiceImpl implements TourService {
                 .build();
     }
 
-    private TourDto computeAttributes(TourDto tourDto) {
+    public TourDto computeAttributes(TourDto tourDto) {
         List<TourLogDto> tourLogs = tourLogService.getTourLogsByTourId(tourDto.getId());
         tourDto.setTourLogs(tourLogs);
         tourDto.setPopularity(computePopularity(tourLogs));
@@ -93,11 +96,11 @@ public class TourServiceImpl implements TourService {
         return tourDto;
     }
 
-    private int computePopularity(List<TourLogDto> logs) {
+    public int computePopularity(List<TourLogDto> logs) {
         return logs.size();
     }
 
-    private double computeChildFriendliness(List<TourLogDto> logs) {
+    public double computeChildFriendliness(List<TourLogDto> logs) {
         if (logs.isEmpty()) {
             return 0;
         }

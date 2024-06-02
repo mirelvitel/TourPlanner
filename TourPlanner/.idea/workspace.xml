@@ -6,14 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="550a64bd-22e6-4cd2-b026-5c93ec5a92b8" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/8e048c5f-ff9a-443a-806a-b33cfa02f554.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/8e048c5f-ff9a-443a-806a-b33cfa02f554.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/8e048c5f-ff9a-443a-806a-b33cfa02f554/storage_v2/_src_/database/tourplanner.eqSVSw/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/8e048c5f-ff9a-443a-806a-b33cfa02f554/storage_v2/_src_/database/tourplanner.eqSVSw/schema/public.abK9xQ.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/tourplanner/backend/api/TourApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/tourplanner/backend/api/TourApi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/tourplanner/backend/persistence/entity/TourEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/tourplanner/backend/persistence/entity/TourEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/tourplanner/backend/persistence/entity/TourLogEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/tourplanner/backend/persistence/entity/TourLogEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/tourplanner/backend/service/dto/TourLogDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/tourplanner/backend/service/dto/TourLogDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/tourplanner/backend/service/implementation/TourServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/tourplanner/backend/service/implementation/TourServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/tourplanner/backend/service/mapper/TourLogMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/tourplanner/backend/service/mapper/TourLogMapper.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,9 +17,12 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 3
-}]]></component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectId" id="2gXZpFx5e2nrjdA2vpbnVtOfyHQ" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -40,7 +37,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/SCHOOL/Semester_IV/Software Engineering/Project/TourPlanner/TourPlanner",
+    "last_opened_file_path": "C:/SCHOOL/Semester_IV/Software Engineering/Project/TourPlanner",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -72,6 +69,8 @@
       <option name="presentableId" value="Default" />
       <updated>1715846063636</updated>
       <workItem from="1715846064615" duration="8880000" />
+      <workItem from="1716792491250" duration="30000" />
+      <workItem from="1716792538535" duration="15000" />
     </task>
     <servers />
   </component>

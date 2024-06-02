@@ -1,23 +1,25 @@
 package com.tourplanner.backend.service.implementation;
 
+import com.tourplanner.backend.persistence.entity.TourEntity;
 import com.tourplanner.backend.persistence.entity.TourLogEntity;
 import com.tourplanner.backend.persistence.repository.TourLogRepository;
 import com.tourplanner.backend.service.dto.TourLogDto;
 import com.tourplanner.backend.service.mapper.TourLogMapper;
+import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.MockitoAnnotations;
 
-import java.util.Optional;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-@ExtendWith(MockitoExtension.class)
+
 public class TourLogServiceImplTest {
 
     @Mock
@@ -29,55 +31,108 @@ public class TourLogServiceImplTest {
     @InjectMocks
     private TourLogServiceImpl tourLogService;
 
-    @Test
-    void whenAddTourLogCalled_thenRepositorySaveCalled() {
-        TourLogDto tourLogDto = new TourLogDto();
-        TourLogEntity tourLogEntity = new TourLogEntity();
+    @BeforeEach
+    public void setUp() {
+        MockitoAnnotations.openMocks(this);
+    }
 
+    @Test
+    public void testAddTourLog() {
+        TourLogDto tourLogDto = new TourLogDto();
+        tourLogDto.setComment("Test Log");
+        TourLogEntity tourLogEntity = new TourLogEntity();
         when(tourLogMapper.toEntity(tourLogDto)).thenReturn(tourLogEntity);
-        when(tourLogRepository.save(any(TourLogEntity.class))).thenReturn(tourLogEntity);
+        when(tourLogRepository.save(tourLogEntity)).thenReturn(tourLogEntity);
 
         tourLogService.addTourLog(tourLogDto);
 
-        verify(tourLogRepository).save(any(TourLogEntity.class));
+        verify(tourLogRepository, times(1)).save(tourLogEntity);
     }
 
     @Test
-    void whenUpdateTourLogCalled_thenRepositorySaveCalledWithCorrectTourLogEntity() {
-        // Arrange
-        final Long tourLogId = 1L;
+    public void testGetTourLogsByTourId() {
+        Long tourId = 1L;
+        TourLogEntity tourLogEntity = new TourLogEntity();
+        tourLogEntity.setTour(new TourEntity());
+        tourLogEntity.getTour().setId(tourId);
+        when(tourLogRepository.findAll()).thenReturn(Arrays.asList(tourLogEntity));
         TourLogDto tourLogDto = new TourLogDto();
-        tourLogDto.setId(tourLogId);
-        tourLogDto.setComment("Nice tour");
+        when(tourLogMapper.toDto(tourLogEntity)).thenReturn(tourLogDto);
 
-        TourLogEntity mockEntity = new TourLogEntity();
-        mockEntity.setId(tourLogDto.getId());
-        mockEntity.setComment(tourLogDto.getComment());
+        List<TourLogDto> result = tourLogService.getTourLogsByTourId(tourId);
 
-        when(tourLogRepository.existsById(tourLogId)).thenReturn(true); // Mocking to return true to pass the validation
-        when(tourLogMapper.toEntity(any(TourLogDto.class))).thenReturn(mockEntity);
-        when(tourLogRepository.save(any(TourLogEntity.class))).thenReturn(mockEntity);
+        assertNotNull(result);
+        assertEquals(1, result.size());
+    }
 
-        // Act
+    @Test
+    public void testUpdateTourLog() {
+        TourLogDto tourLogDto = new TourLogDto();
+        tourLogDto.setId(1L);
+        TourLogEntity tourLogEntity = new TourLogEntity();
+        when(tourLogRepository.existsById(tourLogDto.getId())).thenReturn(true);
+        when(tourLogMapper.toEntity(tourLogDto)).thenReturn(tourLogEntity);
+        when(tourLogRepository.save(tourLogEntity)).thenReturn(tourLogEntity);
+
         tourLogService.updateTourLog(tourLogDto);
 
-        // Assert
-        ArgumentCaptor<TourLogEntity> captor = ArgumentCaptor.forClass(TourLogEntity.class);
-        verify(tourLogRepository).save(captor.capture());
-        TourLogEntity capturedEntity = captor.getValue();
-
-        assertEquals(tourLogDto.getId(), capturedEntity.getId());
-        assertEquals(tourLogDto.getComment(), capturedEntity.getComment());
+        verify(tourLogRepository, times(1)).save(tourLogEntity);
     }
 
     @Test
-    void whenDeleteTourLogCalled_thenRepositoryDeleteByIdCalled() {
+    public void testDeleteTourLog() {
         Long logId = 1L;
-
         when(tourLogRepository.existsById(logId)).thenReturn(true);
+        doNothing().when(tourLogRepository).deleteById(logId);
 
         tourLogService.deleteTourLog(logId);
 
-        verify(tourLogRepository).deleteById(logId);
+        verify(tourLogRepository, times(1)).deleteById(logId);
+    }
+
+    @Test
+    public void testValidateTourLogExists() {
+        Long logId = 1L;
+        when(tourLogRepository.existsById(logId)).thenReturn(true);
+
+        tourLogService.validateTourLogExists(logId);
+
+        verify(tourLogRepository, times(1)).existsById(logId);
+    }
+
+    @Test
+    public void testValidateTourLogNotFound() {
+        Long logId = 1L;
+        when(tourLogRepository.existsById(logId)).thenReturn(false);
+
+        EntityNotFoundException exception = assertThrows(EntityNotFoundException.class, () -> {
+            tourLogService.validateTourLogExists(logId);
+        });
+
+        assertEquals("Tour log not found with id " + logId, exception.getMessage());
+    }
+    @Test
+    public void testUpdateTourLogWithValidData() {
+        TourLogDto tourLogDto = new TourLogDto();
+        tourLogDto.setId(1L);
+        tourLogDto.setComment("Updated Log");
+        TourLogEntity tourLogEntity = new TourLogEntity();
+        when(tourLogRepository.existsById(tourLogDto.getId())).thenReturn(true);
+        when(tourLogMapper.toEntity(tourLogDto)).thenReturn(tourLogEntity);
+        when(tourLogRepository.save(tourLogEntity)).thenReturn(tourLogEntity);
+
+        tourLogService.updateTourLog(tourLogDto);
+
+        verify(tourLogRepository, times(1)).save(tourLogEntity);
+    }
+    @Test
+    public void testGetTourLogsWhenNoLogsExistForTour() {
+        Long tourId = 1L;
+        when(tourLogRepository.findAll()).thenReturn(Collections.emptyList());
+
+        List<TourLogDto> result = tourLogService.getTourLogsByTourId(tourId);
+
+        assertNotNull(result);
+        assertTrue(result.isEmpty());
     }
 }

@@ -1,0 +1,110 @@
+2024-06-02 11:29:52 INFO  TourServiceImpl:36 - New tour added: Test Tour
+2024-06-02 11:29:52 INFO  TourServiceImpl:67 - Fetching all tours
+2024-06-02 11:29:52 INFO  TourServiceImpl:72 - Total tours found: 1
+2024-06-02 11:29:52 INFO  TourServiceImpl:53 - Tour updated: Updated Tour
+2024-06-02 11:29:52 INFO  TourServiceImpl:43 - Tour deleted with id: 1
+2024-06-02 11:29:52 INFO  TourServiceImpl:58 - Fetching tour with id: 1
+2024-06-02 11:29:52 INFO  TourServiceImpl:61 - Tour found: Test Tour
+2024-06-02 11:33:28 INFO  TourServiceImpl:36 - New tour added: Test Tour
+2024-06-02 11:33:29 INFO  TourServiceImpl:67 - Fetching all tours
+2024-06-02 11:33:29 INFO  TourServiceImpl:72 - Total tours found: 1
+2024-06-02 11:33:29 INFO  TourServiceImpl:53 - Tour updated: Updated Tour
+2024-06-02 11:33:29 INFO  TourServiceImpl:43 - Tour deleted with id: 1
+2024-06-02 11:33:29 INFO  TourServiceImpl:58 - Fetching tour with id: 1
+2024-06-02 11:33:29 INFO  TourServiceImpl:61 - Tour found: Test Tour
+2024-06-02 11:35:05 INFO  TourServiceImpl:36 - New tour added: Test Tour
+2024-06-02 11:35:05 INFO  TourServiceImpl:67 - Fetching all tours
+2024-06-02 11:35:05 INFO  TourServiceImpl:72 - Total tours found: 1
+2024-06-02 11:35:05 INFO  TourServiceImpl:53 - Tour updated: Updated Tour
+2024-06-02 11:35:05 INFO  TourServiceImpl:43 - Tour deleted with id: 1
+2024-06-02 11:35:05 INFO  TourServiceImpl:58 - Fetching tour with id: 1
+2024-06-02 11:35:05 INFO  TourServiceImpl:61 - Tour found: Test Tour
+2024-06-02 11:35:15 INFO  TourLogServiceImpl:53 - Tour log updated with id: 1
+2024-06-02 11:35:15 ERROR TourLogServiceImpl:58 - Tour log not found with id: 1
+2024-06-02 11:35:15 INFO  TourLogServiceImpl:39 - Fetching tour logs for tour id: 1
+2024-06-02 11:35:15 INFO  TourLogServiceImpl:44 - Total tour logs found for tour id 1: 1
+2024-06-02 11:35:15 INFO  TourLogServiceImpl:34 - Tour log added: Test Log
+2024-06-02 11:35:15 INFO  TourLogServiceImpl:70 - Tour log deleted with id: 1
+2024-06-02 11:35:39 INFO  TourServiceImpl:36 - New tour added: Test Tour
+2024-06-02 11:35:39 INFO  TourServiceImpl:67 - Fetching all tours
+2024-06-02 11:35:39 INFO  TourServiceImpl:72 - Total tours found: 1
+2024-06-02 11:35:39 INFO  TourServiceImpl:53 - Tour updated: Updated Tour
+2024-06-02 11:35:39 INFO  TourServiceImpl:43 - Tour deleted with id: 1
+2024-06-02 11:35:39 INFO  TourServiceImpl:58 - Fetching tour with id: 1
+2024-06-02 11:35:39 INFO  TourServiceImpl:61 - Tour found: Test Tour
+2024-06-02 11:40:58 INFO  TourServiceImpl:36 - New tour added: Test Tour
+2024-06-02 11:40:58 INFO  TourServiceImpl:67 - Fetching all tours
+2024-06-02 11:40:58 INFO  TourServiceImpl:72 - Total tours found: 1
+2024-06-02 11:40:58 INFO  TourServiceImpl:53 - Tour updated: Updated Tour
+2024-06-02 11:40:58 INFO  TourServiceImpl:43 - Tour deleted with id: 1
+2024-06-02 11:40:58 INFO  TourServiceImpl:58 - Fetching tour with id: 1
+2024-06-02 11:40:58 INFO  TourServiceImpl:61 - Tour found: Test Tour
+2024-06-02 11:40:58 INFO  TourServiceImpl:58 - Fetching tour with id: 999
+2024-06-02 11:42:29 INFO  TourServiceImpl:36 - New tour added: Test Tour
+2024-06-02 11:42:29 INFO  TourServiceImpl:67 - Fetching all tours
+2024-06-02 11:42:29 INFO  TourServiceImpl:72 - Total tours found: 1
+2024-06-02 11:42:29 INFO  TourServiceImpl:53 - Tour updated: Updated Tour
+2024-06-02 11:42:29 INFO  TourServiceImpl:43 - Tour deleted with id: 1
+2024-06-02 11:42:29 INFO  TourServiceImpl:58 - Fetching tour with id: 1
+2024-06-02 11:42:29 INFO  TourServiceImpl:61 - Tour found: Test Tour
+2024-06-02 11:42:29 INFO  TourServiceImpl:58 - Fetching tour with id: 999
+2024-06-02 11:42:47 INFO  TourLogServiceImpl:53 - Tour log updated with id: 1
+2024-06-02 11:42:47 ERROR TourLogServiceImpl:58 - Tour log not found with id: 1
+2024-06-02 11:42:47 INFO  TourLogServiceImpl:39 - Fetching tour logs for tour id: 1
+2024-06-02 11:42:47 INFO  TourLogServiceImpl:44 - Total tour logs found for tour id 1: 1
+2024-06-02 11:42:47 INFO  TourLogServiceImpl:34 - Tour log added: Test Log
+2024-06-02 11:42:47 INFO  TourLogServiceImpl:70 - Tour log deleted with id: 1
+2024-06-02 11:46:09 INFO  TourServiceImpl:58 - Fetching tour with id: 1
+2024-06-02 11:46:09 INFO  TourServiceImpl:61 - Tour found: Test Tour
+2024-06-02 11:46:09 INFO  TourServiceImpl:36 - New tour added: Test Tour
+2024-06-02 11:46:09 INFO  TourServiceImpl:67 - Fetching all tours
+2024-06-02 11:46:09 INFO  TourServiceImpl:72 - Total tours found: 1
+2024-06-02 11:46:09 INFO  TourServiceImpl:53 - Tour updated: Updated Tour
+2024-06-02 11:46:09 INFO  TourServiceImpl:43 - Tour deleted with id: 1
+2024-06-02 11:46:09 INFO  TourServiceImpl:58 - Fetching tour with id: 1
+2024-06-02 11:46:09 INFO  TourServiceImpl:61 - Tour found: Test Tour
+2024-06-02 11:46:10 INFO  TourServiceImpl:53 - Tour updated: Updated Tour
+2024-06-02 11:46:10 INFO  TourServiceImpl:58 - Fetching tour with id: 999
+2024-06-02 11:46:10 INFO  TourServiceImpl:36 - New tour added: null
+2024-06-02 11:46:43 INFO  TourLogServiceImpl:53 - Tour log updated with id: 1
+2024-06-02 11:47:15 INFO  TourServiceImpl:53 - Tour updated: Updated Tour
+2024-06-02 11:47:22 INFO  TourLogServiceImpl:53 - Tour log updated with id: 1
+2024-06-02 11:47:34 INFO  TourLogServiceImpl:53 - Tour log updated with id: 1
+2024-06-02 11:47:34 INFO  TourLogServiceImpl:53 - Tour log updated with id: 1
+2024-06-02 11:47:34 ERROR TourLogServiceImpl:58 - Tour log not found with id: 1
+2024-06-02 11:47:34 INFO  TourLogServiceImpl:39 - Fetching tour logs for tour id: 1
+2024-06-02 11:47:34 INFO  TourLogServiceImpl:44 - Total tour logs found for tour id 1: 1
+2024-06-02 11:47:34 INFO  TourLogServiceImpl:34 - Tour log added: Test Log
+2024-06-02 11:47:34 INFO  TourLogServiceImpl:70 - Tour log deleted with id: 1
+2024-06-02 11:47:39 INFO  TourServiceImpl:58 - Fetching tour with id: 1
+2024-06-02 11:47:39 INFO  TourServiceImpl:61 - Tour found: Test Tour
+2024-06-02 11:47:39 INFO  TourServiceImpl:36 - New tour added: Test Tour
+2024-06-02 11:47:39 INFO  TourServiceImpl:67 - Fetching all tours
+2024-06-02 11:47:39 INFO  TourServiceImpl:72 - Total tours found: 1
+2024-06-02 11:47:39 INFO  TourServiceImpl:53 - Tour updated: Updated Tour
+2024-06-02 11:47:39 INFO  TourServiceImpl:43 - Tour deleted with id: 1
+2024-06-02 11:47:39 INFO  TourServiceImpl:58 - Fetching tour with id: 1
+2024-06-02 11:47:39 INFO  TourServiceImpl:61 - Tour found: Test Tour
+2024-06-02 11:47:39 INFO  TourServiceImpl:53 - Tour updated: Updated Tour
+2024-06-02 11:47:39 INFO  TourServiceImpl:58 - Fetching tour with id: 999
+2024-06-02 11:47:40 INFO  TourServiceImpl:36 - New tour added: null
+2024-06-02 11:50:08 INFO  TourServiceImpl:61 - Fetching tour with id: 1
+2024-06-02 11:50:08 INFO  TourServiceImpl:64 - Tour found: Test Tour
+2024-06-02 11:50:08 INFO  TourServiceImpl:39 - New tour added: Test Tour
+2024-06-02 11:50:08 INFO  TourServiceImpl:70 - Fetching all tours
+2024-06-02 11:50:08 INFO  TourServiceImpl:75 - Total tours found: 1
+2024-06-02 11:50:08 INFO  TourServiceImpl:56 - Tour updated: Updated Tour
+2024-06-02 11:50:08 INFO  TourServiceImpl:46 - Tour deleted with id: 1
+2024-06-02 11:50:08 INFO  TourServiceImpl:61 - Fetching tour with id: 1
+2024-06-02 11:50:08 INFO  TourServiceImpl:64 - Tour found: Test Tour
+2024-06-02 11:50:08 INFO  TourServiceImpl:56 - Tour updated: Updated Tour
+2024-06-02 11:50:08 INFO  TourServiceImpl:61 - Fetching tour with id: 999
+2024-06-02 11:50:20 INFO  TourLogServiceImpl:53 - Tour log updated with id: 1
+2024-06-02 11:50:20 INFO  TourLogServiceImpl:53 - Tour log updated with id: 1
+2024-06-02 11:50:20 ERROR TourLogServiceImpl:58 - Tour log not found with id: 1
+2024-06-02 11:50:20 INFO  TourLogServiceImpl:39 - Fetching tour logs for tour id: 1
+2024-06-02 11:50:20 INFO  TourLogServiceImpl:44 - Total tour logs found for tour id 1: 1
+2024-06-02 11:50:20 INFO  TourLogServiceImpl:34 - Tour log added: Test Log
+2024-06-02 11:50:20 INFO  TourLogServiceImpl:70 - Tour log deleted with id: 1
+2024-06-02 11:54:58 INFO  TourLogServiceImpl:39 - Fetching tour logs for tour id: 1
+2024-06-02 11:54:58 INFO  TourLogServiceImpl:44 - Total tour logs found for tour id 1: 0
