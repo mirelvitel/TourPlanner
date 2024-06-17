@@ -41,16 +41,23 @@ public class TourServiceImpl implements TourService {
 
     @Override
     public void deleteTourById(Long id) {
+        if (!tourRepository.existsById(id)) {
+            throw new RuntimeException("Tour not found");
+        }
         try {
             tourRepository.deleteById(id);
             logger.info("Tour deleted with id: " + id);
         } catch (Exception e) {
             logger.error("Error deleting tour with id: " + id, e);
+            throw new RuntimeException("Error deleting tour with id: " + id, e);
         }
     }
 
     @Override
     public void updateTour(TourDto tourDto) {
+        if (tourDto.getId() == null) {
+            throw new RuntimeException("Tour ID cannot be null");
+        }
         TourEntity entity = mapToEntity(tourDto);
         tourRepository.save(entity);
         logger.info("Tour updated: " + tourDto.getName());

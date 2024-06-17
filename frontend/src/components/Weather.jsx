@@ -32,9 +32,7 @@ const Weather = ({ latitude, longitude, tourName }) => {
 
     return (
         <div className="weather-container">
-            <h3>Current Weather</h3>
-            <p><strong>Current temperature in {tourName}:</strong> {weatherData.hourly.temperature_2m[0]}°C</p>
-            <p><strong>Precipitation:</strong> {weatherData.hourly.precipitation[0]} mm</p>
+            <p><strong>Current temperature:</strong> {weatherData.hourly.temperature_2m[0]}°C</p>
         </div>
     );
 };

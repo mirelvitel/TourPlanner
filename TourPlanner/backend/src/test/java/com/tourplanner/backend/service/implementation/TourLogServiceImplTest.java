@@ -135,4 +135,41 @@ public class TourLogServiceImplTest {
         assertNotNull(result);
         assertTrue(result.isEmpty());
     }
+
+    @Test
+    public void testAddTourLogWithNullDto() {
+        TourLogDto tourLogDto = null;
+
+        assertThrows(NullPointerException.class, () -> {
+            tourLogService.addTourLog(tourLogDto);
+        });
+    }
+
+
+    @Test
+    public void testGetTourLogsByTourIdWithNoMatchingTourId() {
+        Long tourId = 1L;
+        TourLogEntity tourLogEntity = new TourLogEntity();
+        tourLogEntity.setTour(new TourEntity());
+        tourLogEntity.getTour().setId(2L); // Different ID
+        when(tourLogRepository.findAll()).thenReturn(Arrays.asList(tourLogEntity));
+
+        List<TourLogDto> result = tourLogService.getTourLogsByTourId(tourId);
+
+        assertNotNull(result);
+        assertTrue(result.isEmpty());
+    }
+
+    @Test
+    public void testDeleteTourLogWithNonExistentLogId() {
+        Long logId = 1L;
+        when(tourLogRepository.existsById(logId)).thenReturn(false);
+
+        EntityNotFoundException exception = assertThrows(EntityNotFoundException.class, () -> {
+            tourLogService.deleteTourLog(logId);
+        });
+
+        assertEquals("Tour log not found with id " + logId, exception.getMessage());
+    }
+
 }

@@ -60,18 +60,22 @@ public class TourServiceImplTest {
     public void testDeleteTourById() {
         Long id = 1L;
 
+        when(tourRepository.existsById(id)).thenReturn(true);
         doNothing().when(tourRepository).deleteById(id);
 
         tourService.deleteTourById(id);
 
+        verify(tourRepository, times(1)).existsById(id);
         verify(tourRepository, times(1)).deleteById(id);
     }
 
     @Test
     public void testUpdateTour() {
         TourDto tourDto = new TourDto();
+        tourDto.setId(1L); // Ensure ID is set
         tourDto.setName("Updated Tour");
         TourEntity tourEntity = TourEntity.builder()
+                .id(1L)
                 .name("Updated Tour")
                 .build();
 
@@ -82,6 +86,7 @@ public class TourServiceImplTest {
 
         verify(tourRepository, times(1)).save(any(TourEntity.class));
     }
+
 
     @Test
     public void testGetTourById() {
@@ -236,6 +241,33 @@ public class TourServiceImplTest {
         tourService.updateTour(tourDto);
 
         verify(tourRepository, times(1)).save(any(TourEntity.class));
+    }
+    @Test
+    public void testDeleteTourByIdWithInvalidId() {
+        Long invalidId = 999L;
+
+        when(tourRepository.existsById(invalidId)).thenReturn(false);
+
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
+            tourService.deleteTourById(invalidId);
+        });
+
+        assertEquals("Tour not found", exception.getMessage());
+        verify(tourRepository, times(1)).existsById(invalidId);
+        verify(tourRepository, times(0)).deleteById(invalidId);
+    }
+
+    @Test
+    public void testUpdateTourWithMissingId() {
+        TourDto tourDto = new TourDto(); // Missing ID
+        tourDto.setName("Tour Without ID");
+
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
+            tourService.updateTour(tourDto);
+        });
+
+        assertEquals("Tour ID cannot be null", exception.getMessage());
+        verify(tourRepository, times(0)).save(any(TourEntity.class));
     }
 
 
